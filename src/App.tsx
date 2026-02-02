@@ -46,7 +46,7 @@ function App() {
   ).length;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 pb-24">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 pb-20">
       {/* Header */}
       <header className="bg-white border-b border-slate-200 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -157,29 +157,57 @@ function App() {
               </div>
             </div>
 
-            {/* Mobile Filters Modal */}
+            {/* Mobile Filters Bottom Sheet */}
             {showMobileFilters && (
-              <div className="fixed inset-0 bg-black/50 z-50 lg:hidden" onClick={() => setShowMobileFilters(false)}>
+              <div className="fixed inset-0 bg-black/50 z-[55] lg:hidden" onClick={() => setShowMobileFilters(false)}>
                 <div 
-                  className="absolute right-0 top-0 bottom-0 w-80 max-w-[90vw] bg-white overflow-y-auto"
+                  className="absolute left-0 right-0 bottom-0 bg-white rounded-t-2xl shadow-2xl max-h-[80vh] flex flex-col"
                   onClick={e => e.stopPropagation()}
                 >
-                  <div className="sticky top-0 bg-white border-b border-slate-200 p-4 flex items-center justify-between">
-                    <h3 className="font-semibold text-slate-900">Filters</h3>
-                    <button
-                      onClick={() => setShowMobileFilters(false)}
-                      className="p-1 text-slate-400 hover:text-slate-600"
-                    >
-                      <X className="w-5 h-5" />
-                    </button>
+                  {/* Handle */}
+                  <div className="flex justify-center pt-3 pb-2">
+                    <div className="w-10 h-1 bg-slate-300 rounded-full" />
                   </div>
-                  <div className="p-4">
+                  
+                  {/* Header */}
+                  <div className="flex items-center justify-between px-4 pb-3 border-b border-slate-200">
+                    <h3 className="font-semibold text-slate-900">Filters</h3>
+                    <div className="flex items-center gap-2">
+                      {activeFilterCount > 0 && (
+                        <button
+                          onClick={() => setFilters({})}
+                          className="text-sm text-blue-600 font-medium"
+                        >
+                          Clear all
+                        </button>
+                      )}
+                      <button
+                        onClick={() => setShowMobileFilters(false)}
+                        className="p-1.5 bg-slate-100 rounded-full text-slate-500 hover:text-slate-700"
+                      >
+                        <X className="w-5 h-5" />
+                      </button>
+                    </div>
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="flex-1 overflow-y-auto p-4">
                     <FilterPanel 
                       filters={filters} 
                       onFiltersChange={setFilters}
                       cards={cards}
                       isMobile
                     />
+                  </div>
+                  
+                  {/* Footer */}
+                  <div className="p-4 border-t border-slate-200 bg-white pb-20">
+                    <button
+                      onClick={() => setShowMobileFilters(false)}
+                      className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors"
+                    >
+                      Show {filteredCards.length} Cards
+                    </button>
                   </div>
                 </div>
               </div>

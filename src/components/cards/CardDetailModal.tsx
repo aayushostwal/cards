@@ -31,15 +31,15 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
 
   return (
     <div 
-      className="fixed inset-0 bg-black/60 z-[60] flex items-center justify-center p-4 backdrop-blur-sm"
+      className="fixed inset-0 bg-black/60 z-[60] flex items-end sm:items-center justify-center p-0 sm:p-4 pb-16 sm:pb-4 backdrop-blur-sm"
       onClick={onClose}
     >
       <div 
-        className="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-hidden shadow-2xl"
+        className="bg-white rounded-t-2xl sm:rounded-2xl max-w-3xl w-full max-h-[85vh] sm:max-h-[90vh] overflow-hidden shadow-2xl flex flex-col"
         onClick={e => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-6 text-white relative">
+        <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-4 sm:p-6 text-white relative shrink-0">
           <button
             onClick={onClose}
             className="absolute top-4 right-4 p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors"
@@ -76,7 +76,7 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
         </div>
 
         {/* Content */}
-        <div className="overflow-y-auto max-h-[calc(90vh-200px)] p-6">
+        <div className="overflow-y-auto flex-1 p-4 sm:p-6">
           <div className="grid gap-6">
             
             {/* Fees Section */}
@@ -373,7 +373,7 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
         </div>
 
         {/* Footer with Apply Button */}
-        <div className="border-t border-slate-200 p-4 bg-slate-50">
+        <div className="border-t border-slate-200 p-4 bg-slate-50 shrink-0">
           <button
             onClick={handleApply}
             className="w-full flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl transition-all shadow-lg shadow-blue-500/25"
