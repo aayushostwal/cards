@@ -1,0 +1,20 @@
+{
+  "name": "CardCompare India - Credit Card Comparison",
+  "short_name": "CardCompare",
+  "description": "Compare 50+ Indian credit cards across fees, rewards, lounge access and more. Get AI-powered card recommendations.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0F172A",
+  "theme_color": "#3B82F6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["finance", "utilities"],
+  "lang": "en-IN"
+}

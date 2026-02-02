@@ -1,0 +1,11 @@
+# robots.txt for CardCompare India
+# https://cards.aayushostwal.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://cards.aayushostwal.com/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
