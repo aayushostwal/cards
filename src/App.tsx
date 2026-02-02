@@ -31,7 +31,9 @@ function App() {
 
   // Check cookie on mount to determine if we should skip home page
   useEffect(() => {
-    const skipHome = "true" // getCookie('skipHomePage');
+    const skipHome = "true" 
+    const c =  getCookie('skipHomePage');
+    console.log(c);
     if (skipHome === 'true') {
       setActiveTab('browse');
     }
