@@ -1,0 +1,27 @@
+# Credit Card Scraper - Python Dependencies
+
+# Core
+pydantic>=2.0.0
+python-dotenv>=1.0.0
+
+# Web Scraping
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+selenium>=4.15.0
+playwright>=1.40.0
+
+# LLM Processing
+ollama>=0.1.0
+
+# Data Processing
+pandas>=2.0.0
+
+# CLI
+click>=8.1.0
+rich>=13.0.0
+
+# Development
+pytest>=7.4.0
+black>=23.0.0
+ruff>=0.1.0

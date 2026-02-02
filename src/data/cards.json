@@ -1,0 +1,847 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-02",
+  "cards": [
+    {
+      "id": "hdfc-regalia-gold",
+      "basicInfo": {
+        "name": "HDFC Regalia Gold",
+        "issuer": "HDFC Bank",
+        "network": ["Visa", "Mastercard"],
+        "cardType": "Premium",
+        "imageUrl": "https://www.hdfcbank.com/content/api/contentstream-id/723fb80a-2dde-42a3-9793-7ae1be57c87f/0e498896-c498-4f53-b5a5-b0ea045f4d89/Personal/Pay/Cards/Credit%20Cards/Credit%20Card%20Landing%20Page/Credit%20Cards/Super%20Premium%20Credit%20Cards/Regalia%20Gold/regalia-gold-cc.png",
+        "applyUrl": "https://www.hdfcbank.com/personal/pay/cards/credit-cards/regalia-gold-credit-card",
+        "description": "Premium travel and lifestyle card with excellent lounge access and reward points"
+      },
+      "fees": {
+        "joiningFee": 2500,
+        "joiningFeeWaiver": "Spend ₹3L in first 90 days",
+        "annualFee": 2500,
+        "annualFeeWaiver": "Spend ₹5L per year",
+        "renewalFee": 2500,
+        "addOnCardFee": 0,
+        "fuelSurchargeWaiver": {
+          "enabled": true,
+          "maxPerMonth": 500,
+          "minTransaction": 400,
+          "maxTransaction": 5000
+        }
+      },
+      "eligibility": {
+        "minSalary": 120000,
+        "minITR": 1500000,
+        "minCibilScore": 750,
+        "employmentType": ["Salaried", "Self-Employed"],
+        "minAge": 21,
+        "maxAge": 60,
+        "existingRelationship": false
+      },
+      "rewards": {
+        "rewardRate": 4,
+        "rewardUnit": "points",
+        "pointValue": 0.30,
+        "acceleratedCategories": [
+          { "category": "Travel", "rate": 10, "cap": 5000 },
+          { "category": "Dining", "rate": 5, "cap": 2500 },
+          { "category": "International Spends", "rate": 6, "cap": null }
+        ],
+        "welcomeBonus": {
+          "points": 5000,
+          "value": 1500,
+          "condition": "On first transaction within 30 days"
+        },
+        "milestoneRewards": [
+          { "spend": 400000, "reward": "10,000 bonus points", "period": "yearly" },
+          { "spend": 800000, "reward": "15,000 bonus points + vouchers worth ₹5,000", "period": "yearly" }
+        ],
+        "redemptionOptions": ["Flight booking", "Hotel booking", "Gift vouchers", "Product catalog"]
+      },
+      "loungeAccess": {
+        "domestic": {
+          "freeVisits": 12,
+          "perYear": true,
+          "program": "DreamFolks",
+          "guestAccess": true,
+          "guestFee": 1500
+        },
+        "international": {
+          "freeVisits": 6,
+          "perYear": true,
+          "program": "Priority Pass",
+          "guestAccess": true,
+          "guestFee": 2500
+        },
+        "railwayLounge": {
+          "enabled": true,
+          "visits": 4
+        }
+      },
+      "discountsAndOffers": {
+        "platforms": [
+          { "name": "Amazon", "discount": "5%", "cap": 250, "minSpend": 1000, "frequency": "per month" },
+          { "name": "Swiggy", "discount": "15%", "cap": 100, "minSpend": 300, "frequency": "per transaction" },
+          { "name": "BigBasket", "discount": "10%", "cap": 200, "minSpend": 1500, "frequency": "per month" }
+        ],
+        "categories": [
+          { "category": "Movies", "partner": "BookMyShow", "offer": "Buy 1 Get 1 Free (up to 2/month)" },
+          { "category": "Travel", "partner": "MakeMyTrip", "offer": "10% off on flights" },
+          { "category": "Dining", "partner": "Zomato", "offer": "20% off on dining" }
+        ]
+      },
+      "charges": {
+        "interestRate": { "monthly": 3.49, "annual": 41.88 },
+        "cashAdvanceFee": { "percent": 2.5, "min": 500 },
+        "foreignTxnFee": 2.0,
+        "lateFee": 950,
+        "overLimitFee": 600,
+        "emiFee": { "processingPercent": 1.5, "minAmount": 199 },
+        "cardReplacementFee": 200,
+        "statementFee": 50
+      },
+      "features": {
+        "contactless": true,
+        "virtualCard": true,
+        "addOnCards": 4,
+        "insuranceCover": {
+          "airAccident": 10000000,
+          "lostCard": 200000,
+          "purchaseProtection": 100000,
+          "travelInsurance": 2500000
+        },
+        "concierge": true,
+        "golfAccess": { "enabled": true, "freeGames": 2 },
+        "zeroLiability": true,
+        "instantIssuance": false,
+        "emiConversion": true,
+        "rewardTransfer": true,
+        "spendAnalytics": true
+      },
+      "metadata": {
+        "sourceUrl": "https://www.hdfcbank.com/personal/pay/cards/credit-cards/regalia-gold-credit-card",
+        "scrapedAt": "2026-02-01T10:30:00Z",
+        "confidence": 0.95,
+        "manualReview": false
+      }
+    },
+    {
+      "id": "icici-amazon-pay",
+      "basicInfo": {
+        "name": "ICICI Amazon Pay Credit Card",
+        "issuer": "ICICI Bank",
+        "network": ["Visa"],
+        "cardType": "Entry Level",
+        "imageUrl": "https://www.icicibank.com/content/dam/icicibank/managed-assets/images/credit-card/amazon-pay-credit-card.png",
+        "applyUrl": "https://www.icicibank.com/personal-banking/cards/credit-card/amazon-pay-credit-card",
+        "description": "Best card for Amazon shopping with unlimited 5% cashback for Prime members"
+      },
+      "fees": {
+        "joiningFee": 0,
+        "joiningFeeWaiver": null,
+        "annualFee": 0,
+        "annualFeeWaiver": null,
+        "renewalFee": 0,
+        "addOnCardFee": 0,
+        "fuelSurchargeWaiver": {
+          "enabled": true,
+          "maxPerMonth": 100,
+          "minTransaction": 400,
+          "maxTransaction": 4000
+        }
+      },
+      "eligibility": {
+        "minSalary": 25000,
+        "minITR": 300000,
+        "minCibilScore": 700,
+        "employmentType": ["Salaried", "Self-Employed"],
+        "minAge": 21,
+        "maxAge": 65,
+        "existingRelationship": false
+      },
+      "rewards": {
+        "rewardRate": 2,
+        "rewardUnit": "cashback",
+        "pointValue": 1.0,
+        "acceleratedCategories": [
+          { "category": "Amazon (Prime)", "rate": 5, "cap": null },
+          { "category": "Amazon (Non-Prime)", "rate": 3, "cap": null },
+          { "category": "Amazon Pay partners", "rate": 2, "cap": null }
+        ],
+        "welcomeBonus": {
+          "points": null,
+          "value": 500,
+          "condition": "Amazon voucher on card approval"
+        },
+        "milestoneRewards": [],
+        "redemptionOptions": ["Amazon Pay balance", "Bill payments"]
+      },
+      "loungeAccess": {
+        "domestic": null,
+        "international": null,
+        "railwayLounge": null
+      },
+      "discountsAndOffers": {
+        "platforms": [
+          { "name": "Amazon", "discount": "5% (Prime) / 3%", "cap": null, "minSpend": null, "frequency": "per transaction" },
+          { "name": "Swiggy", "discount": "2%", "cap": null, "minSpend": null, "frequency": "per transaction" },
+          { "name": "Zomato", "discount": "2%", "cap": null, "minSpend": null, "frequency": "per transaction" }
+        ],
+        "categories": []
+      },
+      "charges": {
+        "interestRate": { "monthly": 3.40, "annual": 40.80 },
+        "cashAdvanceFee": { "percent": 2.5, "min": 300 },
+        "foreignTxnFee": 3.5,
+        "lateFee": 750,
+        "overLimitFee": 500,
+        "emiFee": { "processingPercent": 1.0, "minAmount": 99 },
+        "cardReplacementFee": 100,
+        "statementFee": 0
+      },
+      "features": {
+        "contactless": true,
+        "virtualCard": true,
+        "addOnCards": 2,
+        "insuranceCover": {
+          "airAccident": null,
+          "lostCard": 50000,
+          "purchaseProtection": null
+        },
+        "concierge": false,
+        "golfAccess": null,
+        "zeroLiability": true,
+        "instantIssuance": true,
+        "emiConversion": true,
+        "spendAnalytics": true
+      },
+      "metadata": {
+        "sourceUrl": "https://www.icicibank.com/personal-banking/cards/credit-card/amazon-pay-credit-card",
+        "scrapedAt": "2026-02-01T11:00:00Z",
+        "confidence": 0.98,
+        "manualReview": false
+      }
+    },
+    {
+      "id": "sbi-cashback",
+      "basicInfo": {
+        "name": "SBI Cashback Credit Card",
+        "issuer": "SBI Card",
+        "network": ["Visa"],
+        "cardType": "Entry Level",
+        "imageUrl": "https://www.sbicard.com/sbi-card-en/assets/media/images/personal/credit-cards/shopping/cashback-sbi-card/sbi-card-cashback.png",
+        "applyUrl": "https://www.sbicard.com/en/personal/credit-cards/shopping/cashback-sbi-card.page",
+        "description": "Flat 5% cashback on all online spends - one of the best cashback cards"
+      },
+      "fees": {
+        "joiningFee": 999,
+        "joiningFeeWaiver": null,
+        "annualFee": 999,
+        "annualFeeWaiver": "Spend ₹2L per year",
+        "renewalFee": 999,
+        "addOnCardFee": 0,
+        "fuelSurchargeWaiver": {
+          "enabled": true,
+          "maxPerMonth": 100,
+          "minTransaction": 500,
+          "maxTransaction": 3000
+        }
+      },
+      "eligibility": {
+        "minSalary": 30000,
+        "minITR": 360000,
+        "minCibilScore": 720,
+        "employmentType": ["Salaried", "Self-Employed"],
+        "minAge": 21,
+        "maxAge": 60,
+        "existingRelationship": false
+      },
+      "rewards": {
+        "rewardRate": 5,
+        "rewardUnit": "cashback",
+        "pointValue": 1.0,
+        "acceleratedCategories": [
+          { "category": "Online Spends", "rate": 5, "cap": 5000, "unit": "per quarter" },
+          { "category": "Offline Spends", "rate": 1, "cap": null }
+        ],
+        "welcomeBonus": {
+          "points": null,
+          "value": 500,
+          "condition": "On first transaction"
+        },
+        "milestoneRewards": [
+          { "spend": 100000, "reward": "₹2,000 cashback", "period": "yearly" }
+        ],
+        "redemptionOptions": ["Statement credit", "Bank transfer"]
+      },
+      "loungeAccess": {
+        "domestic": {
+          "freeVisits": 4,
+          "perYear": true,
+          "program": "DreamFolks",
+          "guestAccess": false
+        },
+        "international": null,
+        "railwayLounge": null
+      },
+      "discountsAndOffers": {
+        "platforms": [
+          { "name": "BigBasket", "discount": "15%", "cap": 300, "minSpend": 1500, "frequency": "per month" },
+          { "name": "Ola", "discount": "10%", "cap": 100, "minSpend": 200, "frequency": "per month" }
+        ],
+        "categories": [
+          { "category": "Movies", "partner": "BookMyShow", "offer": "25% off up to ₹150" }
+        ]
+      },
+      "charges": {
+        "interestRate": { "monthly": 3.35, "annual": 40.20 },
+        "cashAdvanceFee": { "percent": 2.5, "min": 500 },
+        "foreignTxnFee": 3.5,
+        "lateFee": 750,
+        "overLimitFee": 500,
+        "emiFee": { "processingPercent": 1.0, "minAmount": 99 },
+        "cardReplacementFee": 100,
+        "statementFee": 50
+      },
+      "features": {
+        "contactless": true,
+        "virtualCard": true,
+        "addOnCards": 3,
+        "insuranceCover": {
+          "airAccident": 2000000,
+          "lostCard": 50000,
+          "purchaseProtection": null
+        },
+        "concierge": false,
+        "golfAccess": null,
+        "zeroLiability": true,
+        "instantIssuance": false,
+        "emiConversion": true
+      },
+      "metadata": {
+        "sourceUrl": "https://www.sbicard.com/en/personal/credit-cards/shopping/cashback-sbi-card.page",
+        "scrapedAt": "2026-02-01T11:30:00Z",
+        "confidence": 0.95,
+        "manualReview": false
+      }
+    },
+    {
+      "id": "axis-ace",
+      "basicInfo": {
+        "name": "Axis ACE Credit Card",
+        "issuer": "Axis Bank",
+        "network": ["Visa"],
+        "cardType": "Entry Level",
+        "imageUrl": "https://www.axisbank.com/images/default-source/revamp_new/credit-cards/axis-bank-ace-credit-card.png",
+        "applyUrl": "https://www.axisbank.com/retail/cards/credit-card/axis-bank-ace-credit-card",
+        "description": "Flat 5% cashback on bill payments and utility spends via Google Pay"
+      },
+      "fees": {
+        "joiningFee": 499,
+        "joiningFeeWaiver": "Usually waived on application",
+        "annualFee": 499,
+        "annualFeeWaiver": "Spend ₹2L per year",
+        "renewalFee": 499,
+        "addOnCardFee": 0,
+        "fuelSurchargeWaiver": {
+          "enabled": true,
+          "maxPerMonth": 400,
+          "minTransaction": 400,
+          "maxTransaction": 4000
+        }
+      },
+      "eligibility": {
+        "minSalary": 25000,
+        "minITR": 300000,
+        "minCibilScore": 700,
+        "employmentType": ["Salaried", "Self-Employed"],
+        "minAge": 21,
+        "maxAge": 70,
+        "existingRelationship": false
+      },
+      "rewards": {
+        "rewardRate": 2,
+        "rewardUnit": "cashback",
+        "pointValue": 1.0,
+        "acceleratedCategories": [
+          { "category": "Google Pay", "rate": 5, "cap": null },
+          { "category": "Bill Payments", "rate": 5, "cap": null },
+          { "category": "Swiggy/Zomato", "rate": 4, "cap": null },
+          { "category": "Others", "rate": 2, "cap": null }
+        ],
+        "welcomeBonus": null,
+        "milestoneRewards": [],
+        "redemptionOptions": ["Statement credit"]
+      },
+      "loungeAccess": {
+        "domestic": {
+          "freeVisits": 4,
+          "perYear": true,
+          "program": "DreamFolks",
+          "guestAccess": false
+        },
+        "international": null,
+        "railwayLounge": null
+      },
+      "discountsAndOffers": {
+        "platforms": [
+          { "name": "Swiggy", "discount": "4% cashback", "cap": null, "minSpend": null, "frequency": "per transaction" },
+          { "name": "Zomato", "discount": "4% cashback", "cap": null, "minSpend": null, "frequency": "per transaction" },
+          { "name": "Uber", "discount": "4% cashback", "cap": null, "minSpend": null, "frequency": "per transaction" }
+        ],
+        "categories": []
+      },
+      "charges": {
+        "interestRate": { "monthly": 3.40, "annual": 40.80 },
+        "cashAdvanceFee": { "percent": 2.5, "min": 500 },
+        "foreignTxnFee": 3.5,
+        "lateFee": 800,
+        "overLimitFee": 500,
+        "emiFee": { "processingPercent": 1.0, "minAmount": 199 },
+        "cardReplacementFee": 200,
+        "statementFee": 50
+      },
+      "features": {
+        "contactless": true,
+        "virtualCard": true,
+        "addOnCards": 3,
+        "insuranceCover": {
+          "airAccident": 1000000,
+          "lostCard": 100000,
+          "purchaseProtection": null
+        },
+        "concierge": false,
+        "golfAccess": null,
+        "zeroLiability": true,
+        "instantIssuance": true,
+        "emiConversion": true
+      },
+      "metadata": {
+        "sourceUrl": "https://www.axisbank.com/retail/cards/credit-card/axis-bank-ace-credit-card",
+        "scrapedAt": "2026-02-01T12:00:00Z",
+        "confidence": 0.95,
+        "manualReview": false
+      }
+    },
+    {
+      "id": "amex-mrcc",
+      "basicInfo": {
+        "name": "American Express Membership Rewards Credit Card",
+        "issuer": "American Express",
+        "network": ["Amex"],
+        "cardType": "Premium",
+        "imageUrl": "https://www.americanexpress.com/content/dam/amex/in/credit-cards/membership-rewards-credit-card/mrcc-card-image.png",
+        "applyUrl": "https://www.americanexpress.com/in/credit-cards/membership-rewards-credit-card/",
+        "description": "Best for Flipkart and Amazon shopping with 4x/2x accelerated rewards"
+      },
+      "fees": {
+        "joiningFee": 1000,
+        "joiningFeeWaiver": "First year free",
+        "annualFee": 4500,
+        "annualFeeWaiver": "Spend ₹1.5L per year",
+        "renewalFee": 4500,
+        "addOnCardFee": 0,
+        "fuelSurchargeWaiver": {
+          "enabled": true,
+          "maxPerMonth": 200,
+          "minTransaction": 400,
+          "maxTransaction": 4000
+        }
+      },
+      "eligibility": {
+        "minSalary": 50000,
+        "minITR": 600000,
+        "minCibilScore": 750,
+        "employmentType": ["Salaried", "Self-Employed"],
+        "minAge": 21,
+        "maxAge": 65,
+        "existingRelationship": false
+      },
+      "rewards": {
+        "rewardRate": 1,
+        "rewardUnit": "points",
+        "pointValue": 0.25,
+        "acceleratedCategories": [
+          { "category": "Flipkart", "rate": 4, "cap": null },
+          { "category": "Amazon (Fri-Sun)", "rate": 2, "cap": null },
+          { "category": "Uber", "rate": 3, "cap": null }
+        ],
+        "welcomeBonus": {
+          "points": 4000,
+          "value": 1000,
+          "condition": "On spending ₹20,000 within 90 days"
+        },
+        "milestoneRewards": [
+          { "spend": 150000, "reward": "Bonus 5,000 points", "period": "yearly" },
+          { "spend": 300000, "reward": "Bonus 10,000 points", "period": "yearly" }
+        ],
+        "redemptionOptions": ["Flipkart vouchers", "Amazon vouchers", "Statement credit", "Airmiles"]
+      },
+      "loungeAccess": {
+        "domestic": {
+          "freeVisits": 4,
+          "perYear": true,
+          "program": "Amex Lounge",
+          "guestAccess": false
+        },
+        "international": null,
+        "railwayLounge": null
+      },
+      "discountsAndOffers": {
+        "platforms": [
+          { "name": "Flipkart", "discount": "4x points", "cap": null, "minSpend": null, "frequency": "per transaction" },
+          { "name": "Amazon", "discount": "2x points (Fri-Sun)", "cap": null, "minSpend": null, "frequency": "per transaction" },
+          { "name": "Uber", "discount": "3x points", "cap": null, "minSpend": null, "frequency": "per transaction" }
+        ],
+        "categories": [
+          { "category": "Dining", "partner": "Various", "offer": "20% off at select restaurants" }
+        ]
+      },
+      "charges": {
+        "interestRate": { "monthly": 3.50, "annual": 42.00 },
+        "cashAdvanceFee": { "percent": 3.5, "min": 500 },
+        "foreignTxnFee": 3.5,
+        "lateFee": 900,
+        "overLimitFee": 500,
+        "emiFee": { "processingPercent": 2.0, "minAmount": 250 },
+        "cardReplacementFee": 0,
+        "statementFee": 0
+      },
+      "features": {
+        "contactless": true,
+        "virtualCard": false,
+        "addOnCards": 4,
+        "insuranceCover": {
+          "airAccident": 5000000,
+          "lostCard": 100000,
+          "purchaseProtection": 50000
+        },
+        "concierge": false,
+        "golfAccess": null,
+        "zeroLiability": true,
+        "instantIssuance": false,
+        "emiConversion": false
+      },
+      "metadata": {
+        "sourceUrl": "https://www.americanexpress.com/in/credit-cards/membership-rewards-credit-card/",
+        "scrapedAt": "2026-02-01T12:30:00Z",
+        "confidence": 0.92,
+        "manualReview": false
+      }
+    },
+    {
+      "id": "hdfc-millennia",
+      "basicInfo": {
+        "name": "HDFC Millennia Credit Card",
+        "issuer": "HDFC Bank",
+        "network": ["Visa", "Mastercard"],
+        "cardType": "Entry Level",
+        "imageUrl": "https://www.hdfcbank.com/content/api/contentstream-id/723fb80a-2dde-42a3-9793-7ae1be57c87f/e3ab0622-68cc-4d67-9d98-3d4f638e4e1d/Personal/Pay/Cards/Credit%20Cards/Credit%20Card%20Landing%20Page/Credit%20Cards/Millennia/Millennia-CC.png",
+        "applyUrl": "https://www.hdfcbank.com/personal/pay/cards/credit-cards/hdfc-bank-millennia-credit-card",
+        "description": "Cashback card targeted at millennials with 5% on Amazon, Flipkart, and more"
+      },
+      "fees": {
+        "joiningFee": 1000,
+        "joiningFeeWaiver": "Usually waived",
+        "annualFee": 1000,
+        "annualFeeWaiver": "Spend ₹1L per year",
+        "renewalFee": 1000,
+        "addOnCardFee": 0,
+        "fuelSurchargeWaiver": {
+          "enabled": true,
+          "maxPerMonth": 400,
+          "minTransaction": 400,
+          "maxTransaction": 5000
+        }
+      },
+      "eligibility": {
+        "minSalary": 25000,
+        "minITR": 300000,
+        "minCibilScore": 700,
+        "employmentType": ["Salaried", "Self-Employed"],
+        "minAge": 21,
+        "maxAge": 60,
+        "existingRelationship": false
+      },
+      "rewards": {
+        "rewardRate": 1,
+        "rewardUnit": "cashback",
+        "pointValue": 1.0,
+        "acceleratedCategories": [
+          { "category": "Amazon/Flipkart/Myntra", "rate": 5, "cap": 750, "unit": "per month" },
+          { "category": "Instant Voucher/PayZapp/SmartBuy", "rate": 5, "cap": 750, "unit": "per month" },
+          { "category": "Other Online", "rate": 2.5, "cap": null },
+          { "category": "Offline", "rate": 1, "cap": null }
+        ],
+        "welcomeBonus": {
+          "points": null,
+          "value": 1000,
+          "condition": "On first spend within 30 days"
+        },
+        "milestoneRewards": [],
+        "redemptionOptions": ["CashPoints", "SmartBuy"]
+      },
+      "loungeAccess": {
+        "domestic": {
+          "freeVisits": 8,
+          "perYear": true,
+          "program": "DreamFolks",
+          "guestAccess": false
+        },
+        "international": null,
+        "railwayLounge": null
+      },
+      "discountsAndOffers": {
+        "platforms": [
+          { "name": "Amazon", "discount": "5% cashback", "cap": 750, "minSpend": null, "frequency": "per month" },
+          { "name": "Flipkart", "discount": "5% cashback", "cap": 750, "minSpend": null, "frequency": "per month" },
+          { "name": "Myntra", "discount": "5% cashback", "cap": 750, "minSpend": null, "frequency": "per month" }
+        ],
+        "categories": [
+          { "category": "Movies", "partner": "BookMyShow", "offer": "Buy 1 Get 1" }
+        ]
+      },
+      "charges": {
+        "interestRate": { "monthly": 3.49, "annual": 41.88 },
+        "cashAdvanceFee": { "percent": 2.5, "min": 500 },
+        "foreignTxnFee": 3.5,
+        "lateFee": 750,
+        "overLimitFee": 500,
+        "emiFee": { "processingPercent": 1.0, "minAmount": 199 },
+        "cardReplacementFee": 200,
+        "statementFee": 50
+      },
+      "features": {
+        "contactless": true,
+        "virtualCard": true,
+        "addOnCards": 2,
+        "insuranceCover": {
+          "airAccident": 1000000,
+          "lostCard": 100000,
+          "purchaseProtection": null
+        },
+        "concierge": false,
+        "golfAccess": null,
+        "zeroLiability": true,
+        "instantIssuance": false,
+        "emiConversion": true
+      },
+      "metadata": {
+        "sourceUrl": "https://www.hdfcbank.com/personal/pay/cards/credit-cards/hdfc-bank-millennia-credit-card",
+        "scrapedAt": "2026-02-01T13:00:00Z",
+        "confidence": 0.95,
+        "manualReview": false
+      }
+    },
+    {
+      "id": "icici-sapphiro",
+      "basicInfo": {
+        "name": "ICICI Sapphiro Credit Card",
+        "issuer": "ICICI Bank",
+        "network": ["Visa", "Mastercard"],
+        "cardType": "Super Premium",
+        "imageUrl": "https://www.icicibank.com/content/dam/icicibank/managed-assets/images/credit-card/sapphiro-credit-card.png",
+        "applyUrl": "https://www.icicibank.com/personal-banking/cards/credit-card/sapphiro-credit-card",
+        "description": "Super premium card with unlimited lounge access and excellent travel benefits"
+      },
+      "fees": {
+        "joiningFee": 6500,
+        "joiningFeeWaiver": "On NRV of ₹15L+",
+        "annualFee": 6500,
+        "annualFeeWaiver": "Spend ₹6L per year",
+        "renewalFee": 6500,
+        "addOnCardFee": 0,
+        "fuelSurchargeWaiver": {
+          "enabled": true,
+          "maxPerMonth": 600,
+          "minTransaction": 400,
+          "maxTransaction": 5000
+        }
+      },
+      "eligibility": {
+        "minSalary": 200000,
+        "minITR": 2400000,
+        "minCibilScore": 780,
+        "employmentType": ["Salaried", "Self-Employed"],
+        "minAge": 21,
+        "maxAge": 60,
+        "existingRelationship": true,
+        "otherRequirements": ["NRV ₹15 Lakhs+ with ICICI"]
+      },
+      "rewards": {
+        "rewardRate": 4,
+        "rewardUnit": "points",
+        "pointValue": 0.50,
+        "acceleratedCategories": [
+          { "category": "International", "rate": 6, "cap": null },
+          { "category": "Dining", "rate": 5, "cap": null },
+          { "category": "Travel", "rate": 5, "cap": null }
+        ],
+        "welcomeBonus": {
+          "points": 10000,
+          "value": 5000,
+          "condition": "On first transaction"
+        },
+        "milestoneRewards": [
+          { "spend": 500000, "reward": "Club Marriott membership", "period": "yearly" },
+          { "spend": 1000000, "reward": "15,000 bonus points", "period": "yearly" }
+        ],
+        "redemptionOptions": ["Air miles", "Hotels", "Gift vouchers", "Statement credit"]
+      },
+      "loungeAccess": {
+        "domestic": {
+          "freeVisits": 24,
+          "perYear": true,
+          "program": "DreamFolks",
+          "guestAccess": true,
+          "guestFee": 0
+        },
+        "international": {
+          "freeVisits": 12,
+          "perYear": true,
+          "program": "Priority Pass",
+          "guestAccess": true,
+          "guestFee": 2000
+        },
+        "railwayLounge": {
+          "enabled": true,
+          "visits": 8
+        }
+      },
+      "discountsAndOffers": {
+        "platforms": [
+          { "name": "MakeMyTrip", "discount": "15% off", "cap": 3000, "minSpend": 5000, "frequency": "per transaction" },
+          { "name": "EazyDiner", "discount": "25% off", "cap": 500, "minSpend": null, "frequency": "per transaction" }
+        ],
+        "categories": [
+          { "category": "Travel", "partner": "Yatra", "offer": "Up to ₹5,000 off on international flights" },
+          { "category": "Hotels", "partner": "Taj Hotels", "offer": "20% off on room bookings" },
+          { "category": "Golf", "partner": "Various", "offer": "2 complimentary green fees per quarter" }
+        ]
+      },
+      "charges": {
+        "interestRate": { "monthly": 3.30, "annual": 39.60 },
+        "cashAdvanceFee": { "percent": 2.5, "min": 500 },
+        "foreignTxnFee": 1.5,
+        "lateFee": 950,
+        "overLimitFee": 600,
+        "emiFee": { "processingPercent": 1.0, "minAmount": 199 },
+        "cardReplacementFee": 0,
+        "statementFee": 0
+      },
+      "features": {
+        "contactless": true,
+        "virtualCard": true,
+        "addOnCards": 5,
+        "insuranceCover": {
+          "airAccident": 25000000,
+          "lostCard": 500000,
+          "purchaseProtection": 200000,
+          "travelInsurance": 5000000,
+          "medicalEmergency": 2500000
+        },
+        "concierge": true,
+        "golfAccess": { "enabled": true, "freeGames": 8 },
+        "zeroLiability": true,
+        "instantIssuance": false,
+        "emiConversion": true,
+        "rewardTransfer": true,
+        "spendAnalytics": true
+      },
+      "metadata": {
+        "sourceUrl": "https://www.icicibank.com/personal-banking/cards/credit-card/sapphiro-credit-card",
+        "scrapedAt": "2026-02-01T13:30:00Z",
+        "confidence": 0.93,
+        "manualReview": false
+      }
+    },
+    {
+      "id": "kotak-811",
+      "basicInfo": {
+        "name": "Kotak 811 #DreamDifferent Credit Card",
+        "issuer": "Kotak Mahindra Bank",
+        "network": ["Visa"],
+        "cardType": "Entry Level",
+        "imageUrl": "https://www.kotak.com/content/dam/Kotak/product_card_images/credit-card/811-dream-different-credit-card.png",
+        "applyUrl": "https://www.kotak.com/en/personal-banking/cards/credit-cards/811-dreamdifferent-credit-card.html",
+        "description": "Entry-level card with no minimum income requirement - good for first-time users"
+      },
+      "fees": {
+        "joiningFee": 0,
+        "joiningFeeWaiver": null,
+        "annualFee": 0,
+        "annualFeeWaiver": null,
+        "renewalFee": 0,
+        "addOnCardFee": 0,
+        "fuelSurchargeWaiver": {
+          "enabled": true,
+          "maxPerMonth": 50,
+          "minTransaction": 500,
+          "maxTransaction": 3000
+        }
+      },
+      "eligibility": {
+        "minSalary": null,
+        "minITR": null,
+        "minCibilScore": 650,
+        "employmentType": ["Salaried", "Self-Employed", "Business Owner"],
+        "minAge": 18,
+        "maxAge": 65,
+        "existingRelationship": false,
+        "otherRequirements": ["811 account required"]
+      },
+      "rewards": {
+        "rewardRate": 2,
+        "rewardUnit": "cashback",
+        "pointValue": 1.0,
+        "acceleratedCategories": [
+          { "category": "All Online", "rate": 2, "cap": 1000, "unit": "per month" },
+          { "category": "All Offline", "rate": 1, "cap": 500, "unit": "per month" }
+        ],
+        "welcomeBonus": null,
+        "milestoneRewards": [],
+        "redemptionOptions": ["Statement credit"]
+      },
+      "loungeAccess": {
+        "domestic": null,
+        "international": null,
+        "railwayLounge": null
+      },
+      "discountsAndOffers": {
+        "platforms": [],
+        "categories": [
+          { "category": "Movies", "partner": "BookMyShow", "offer": "25% off (up to ₹100)" }
+        ]
+      },
+      "charges": {
+        "interestRate": { "monthly": 3.50, "annual": 42.00 },
+        "cashAdvanceFee": { "percent": 2.5, "min": 300 },
+        "foreignTxnFee": 3.5,
+        "lateFee": 500,
+        "overLimitFee": 500,
+        "emiFee": { "processingPercent": 1.5, "minAmount": 99 },
+        "cardReplacementFee": 100,
+        "statementFee": 0
+      },
+      "features": {
+        "contactless": true,
+        "virtualCard": true,
+        "addOnCards": 0,
+        "insuranceCover": {
+          "airAccident": null,
+          "lostCard": 25000,
+          "purchaseProtection": null
+        },
+        "concierge": false,
+        "golfAccess": null,
+        "zeroLiability": true,
+        "instantIssuance": true,
+        "emiConversion": true
+      },
+      "metadata": {
+        "sourceUrl": "https://www.kotak.com/en/personal-banking/cards/credit-cards/811-dreamdifferent-credit-card.html",
+        "scrapedAt": "2026-02-01T14:00:00Z",
+        "confidence": 0.95,
+        "manualReview": false
+      }
+    }
+  ]
+}
