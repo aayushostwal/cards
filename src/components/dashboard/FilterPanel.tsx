@@ -5,9 +5,10 @@ interface FilterPanelProps {
   filters: CardFilters;
   onFiltersChange: (filters: CardFilters) => void;
   cards: CreditCard[];
+  isMobile?: boolean;
 }
 
-export function FilterPanel({ filters, onFiltersChange, cards }: FilterPanelProps) {
+export function FilterPanel({ filters, onFiltersChange, cards, isMobile }: FilterPanelProps) {
   // Get unique values from cards
   const issuers = [...new Set(cards.map(c => c.basicInfo.issuer))].sort();
   const networks: CardNetwork[] = ['Visa', 'Mastercard', 'RuPay', 'Amex'];
@@ -35,25 +36,38 @@ export function FilterPanel({ filters, onFiltersChange, cards }: FilterPanelProp
   const clearFilters = () => onFiltersChange({});
 
   return (
-    <div className="bg-white rounded-xl border border-slate-200 sticky top-24">
-      {/* Header */}
-      <div className="p-4 border-b border-slate-200 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Filter className="w-5 h-5 text-slate-600" />
-          <h2 className="font-semibold text-slate-900">Filters</h2>
+    <div className={`bg-white ${isMobile ? '' : 'rounded-xl border border-slate-200 sticky top-20'}`}>
+      {/* Header - Only show on desktop */}
+      {!isMobile && (
+        <div className="p-4 border-b border-slate-200 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Filter className="w-5 h-5 text-slate-600" />
+            <h2 className="font-semibold text-slate-900">Filters</h2>
+          </div>
+          {hasActiveFilters && (
+            <button
+              onClick={clearFilters}
+              className="text-sm text-blue-600 hover:text-blue-700 flex items-center gap-1"
+            >
+              <X className="w-4 h-4" />
+              Clear all
+            </button>
+          )}
         </div>
-        {hasActiveFilters && (
-          <button
-            onClick={clearFilters}
-            className="text-sm text-blue-600 hover:text-blue-700 flex items-center gap-1"
-          >
-            <X className="w-4 h-4" />
-            Clear all
-          </button>
-        )}
-      </div>
+      )}
 
-      <div className="p-4 space-y-6 max-h-[calc(100vh-200px)] overflow-y-auto">
+      {/* Clear button for mobile */}
+      {isMobile && hasActiveFilters && (
+        <button
+          onClick={clearFilters}
+          className="w-full mb-4 text-sm text-blue-600 hover:text-blue-700 flex items-center justify-center gap-1 py-2 border border-blue-200 rounded-lg"
+        >
+          <X className="w-4 h-4" />
+          Clear all filters
+        </button>
+      )}
+
+      <div className={`space-y-6 ${isMobile ? '' : 'p-4 max-h-[calc(100vh-200px)] overflow-y-auto'}`}>
         {/* Issuer */}
         <div>
           <h3 className="text-sm font-medium text-slate-900 mb-3">Bank / Issuer</h3>
@@ -232,6 +246,17 @@ export function FilterPanel({ filters, onFiltersChange, cards }: FilterPanelProp
           </div>
         </div>
       </div>
+
+      {/* Apply button for mobile */}
+      {isMobile && (
+        <div className="mt-6 pt-4 border-t border-slate-200">
+          <button
+            className="w-full py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            Apply Filters
+          </button>
+        </div>
+      )}
     </div>
   );
 }

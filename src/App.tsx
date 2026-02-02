@@ -2,17 +2,18 @@ import { useState } from 'react';
 import { CardGrid } from './components/cards/CardGrid';
 import { CardComparison } from './components/cards/CardComparison';
 import { FilterPanel } from './components/dashboard/FilterPanel';
-import { ChatInterface } from './components/ai/ChatInterface';
+import { AIChatBar } from './components/ai/AIChatBar';
 import type { CreditCard, CardFilters } from './types/card';
 import cardsData from './data/cards.json';
-import { CreditCard as CreditCardIcon, BarChart3, MessageSquare, GitCompare } from 'lucide-react';
+import { CreditCard as CreditCardIcon, BarChart3, GitCompare, SlidersHorizontal, X } from 'lucide-react';
 
-type Tab = 'browse' | 'compare' | 'ai';
+type Tab = 'browse' | 'compare';
 
 function App() {
   const [activeTab, setActiveTab] = useState<Tab>('browse');
   const [filters, setFilters] = useState<CardFilters>({});
   const [selectedCards, setSelectedCards] = useState<string[]>([]);
+  const [showMobileFilters, setShowMobileFilters] = useState(false);
   const cards = cardsData.cards as CreditCard[];
 
   const filteredCards = cards.filter(card => {
@@ -39,19 +40,26 @@ function App() {
 
   const selectedCardObjects = cards.filter(c => selectedCards.includes(c.id));
 
+  const activeFilterCount = Object.values(filters).filter(v => 
+    v !== undefined && (Array.isArray(v) ? v.length > 0 : true)
+  ).length;
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 pb-24">
       {/* Header */}
-      <header className="bg-white border-b border-slate-200 sticky top-0 z-50">
+      <header className="bg-white border-b border-slate-200 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center gap-3">
-              <div className="bg-blue-600 p-2 rounded-lg">
-                <CreditCardIcon className="w-6 h-6 text-white" />
+          <div className="flex items-center justify-between h-14 sm:h-16">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="bg-gradient-to-br from-blue-500 to-purple-600 p-1.5 sm:p-2 rounded-xl shadow-md">
+                <CreditCardIcon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-slate-900">CardCompare India</h1>
-                <p className="text-xs text-slate-500">Compare 50+ Credit Cards</p>
+                <h1 className="text-lg sm:text-xl font-bold">
+                  <span className="text-slate-900">Card</span>
+                  <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Compare</span>
+                </h1>
+                <p className="text-xs text-slate-500 hidden sm:block">Compare 50+ Credit Cards</p>
               </div>
             </div>
             
@@ -59,41 +67,30 @@ function App() {
             <nav className="flex gap-1">
               <button
                 onClick={() => setActiveTab('browse')}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                   activeTab === 'browse'
                     ? 'bg-blue-100 text-blue-700'
                     : 'text-slate-600 hover:bg-slate-100'
                 }`}
               >
                 <BarChart3 className="w-4 h-4" />
-                Browse Cards
+                <span className="hidden sm:inline">Browse</span>
               </button>
               <button
                 onClick={() => setActiveTab('compare')}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                   activeTab === 'compare'
                     ? 'bg-blue-100 text-blue-700'
                     : 'text-slate-600 hover:bg-slate-100'
                 }`}
               >
                 <GitCompare className="w-4 h-4" />
-                Compare
+                <span className="hidden sm:inline">Compare</span>
                 {selectedCards.length > 0 && (
-                  <span className="bg-blue-600 text-white text-xs px-2 py-0.5 rounded-full">
+                  <span className="bg-blue-600 text-white text-xs px-1.5 py-0.5 rounded-full">
                     {selectedCards.length}
                   </span>
                 )}
-              </button>
-              <button
-                onClick={() => setActiveTab('ai')}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  activeTab === 'ai'
-                    ? 'bg-blue-100 text-blue-700'
-                    : 'text-slate-600 hover:bg-slate-100'
-                }`}
-              >
-                <MessageSquare className="w-4 h-4" />
-                AI Assistant
               </button>
             </nav>
           </div>
@@ -101,35 +98,81 @@ function App() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
         {activeTab === 'browse' && (
-          <div className="flex gap-8">
-            {/* Filters Sidebar */}
-            <aside className="w-72 shrink-0">
-              <FilterPanel 
-                filters={filters} 
-                onFiltersChange={setFilters}
-                cards={cards}
-              />
-            </aside>
-            
-            {/* Cards Grid */}
-            <div className="flex-1">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-lg font-semibold text-slate-900">
-                  {filteredCards.length} Cards Found
-                </h2>
-                <p className="text-sm text-slate-500">
-                  Select up to 4 cards to compare
-                </p>
-              </div>
-              <CardGrid 
-                cards={filteredCards}
-                selectedCards={selectedCards}
-                onToggleSelect={toggleCardSelection}
-              />
+          <>
+            {/* Mobile Filter Button */}
+            <div className="lg:hidden mb-4">
+              <button
+                onClick={() => setShowMobileFilters(true)}
+                className="flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-lg text-sm font-medium text-slate-700"
+              >
+                <SlidersHorizontal className="w-4 h-4" />
+                Filters
+                {activeFilterCount > 0 && (
+                  <span className="bg-blue-600 text-white text-xs px-1.5 py-0.5 rounded-full">
+                    {activeFilterCount}
+                  </span>
+                )}
+              </button>
             </div>
-          </div>
+
+            <div className="flex gap-6 lg:gap-8">
+              {/* Filters Sidebar - Desktop */}
+              <aside className="hidden lg:block w-64 xl:w-72 shrink-0">
+                <FilterPanel 
+                  filters={filters} 
+                  onFiltersChange={setFilters}
+                  cards={cards}
+                />
+              </aside>
+              
+              {/* Cards Grid */}
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center justify-between mb-4 sm:mb-6">
+                  <h2 className="text-base sm:text-lg font-semibold text-slate-900">
+                    {filteredCards.length} Cards
+                  </h2>
+                  <p className="text-xs sm:text-sm text-slate-500">
+                    Select up to 4 to compare
+                  </p>
+                </div>
+                <CardGrid 
+                  cards={filteredCards}
+                  selectedCards={selectedCards}
+                  onToggleSelect={toggleCardSelection}
+                />
+              </div>
+            </div>
+
+            {/* Mobile Filters Modal */}
+            {showMobileFilters && (
+              <div className="fixed inset-0 bg-black/50 z-50 lg:hidden" onClick={() => setShowMobileFilters(false)}>
+                <div 
+                  className="absolute right-0 top-0 bottom-0 w-80 max-w-[90vw] bg-white overflow-y-auto"
+                  onClick={e => e.stopPropagation()}
+                >
+                  <div className="sticky top-0 bg-white border-b border-slate-200 p-4 flex items-center justify-between">
+                    <h3 className="font-semibold text-slate-900">Filters</h3>
+                    <button
+                      onClick={() => setShowMobileFilters(false)}
+                      className="p-1 text-slate-400 hover:text-slate-600"
+                    >
+                      <X className="w-5 h-5" />
+                    </button>
+                  </div>
+                  <div className="p-4">
+                    <FilterPanel 
+                      filters={filters} 
+                      onFiltersChange={setFilters}
+                      cards={cards}
+                      isMobile
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+          </>
         )}
 
         {activeTab === 'compare' && (
@@ -140,21 +183,20 @@ function App() {
             onAddCard={(id) => toggleCardSelection(id)}
           />
         )}
-
-        {activeTab === 'ai' && (
-          <ChatInterface cards={cards} />
-        )}
       </main>
 
-      {/* Footer */}
-      <footer className="bg-white border-t border-slate-200 py-6 mt-12">
+      {/* Footer - only visible when chat is closed */}
+      <footer className="bg-white border-t border-slate-200 py-4 mt-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center text-sm text-slate-500">
+          <p className="text-center text-xs sm:text-sm text-slate-500">
             Data last updated: {cardsData.lastUpdated} • 
-            Always verify details on the bank's official website before applying
+            Always verify on bank's official website
           </p>
         </div>
       </footer>
+
+      {/* Floating AI Chat Bar */}
+      <AIChatBar cards={cards} />
     </div>
   );
 }
