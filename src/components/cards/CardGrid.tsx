@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import type { CreditCard } from '../../types/card';
 import { formatCurrency } from '../../lib/utils';
 import { Check, Plus, Plane, Percent } from 'lucide-react';
+import { CardDetailModal } from './CardDetailModal';
 
 interface CardGridProps {
   cards: CreditCard[];
@@ -9,7 +11,16 @@ interface CardGridProps {
 }
 
 export function CardGrid({ cards, selectedCards, onToggleSelect }: CardGridProps) {
+  const [selectedCard, setSelectedCard] = useState<CreditCard | null>(null);
+
   return (
+    <>
+    {selectedCard && (
+      <CardDetailModal 
+        card={selectedCard} 
+        onClose={() => setSelectedCard(null)} 
+      />
+    )}
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
       {cards.map(card => {
         const isSelected = selectedCards.includes(card.id);
@@ -17,7 +28,8 @@ export function CardGrid({ cards, selectedCards, onToggleSelect }: CardGridProps
         return (
           <div
             key={card.id}
-            className={`bg-white rounded-xl border-2 transition-all hover:shadow-md flex flex-col h-full ${
+            onClick={() => setSelectedCard(card)}
+            className={`bg-white rounded-xl border-2 transition-all hover:shadow-md flex flex-col h-full cursor-pointer ${
               isSelected ? 'border-blue-500 shadow-blue-100 shadow-md' : 'border-slate-200 hover:border-slate-300'
             }`}
           >
@@ -38,7 +50,10 @@ export function CardGrid({ cards, selectedCards, onToggleSelect }: CardGridProps
                   </span>
                 </div>
                 <button
-                  onClick={() => onToggleSelect(card.id)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onToggleSelect(card.id);
+                  }}
                   className={`p-1.5 rounded-lg transition-colors shrink-0 ${
                     isSelected 
                       ? 'bg-blue-600 text-white' 
@@ -109,20 +124,22 @@ export function CardGrid({ cards, selectedCards, onToggleSelect }: CardGridProps
               </div>
             </div>
 
-            {/* Apply Button */}
+            {/* View Details Button */}
             <div className="p-3 pt-0">
-              <a
-                href={card.basicInfo.applyUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelectedCard(card);
+                }}
                 className="block w-full text-center py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors"
               >
-                Apply
-              </a>
+                View Details
+              </button>
             </div>
           </div>
         );
       })}
     </div>
+    </>
   );
 }

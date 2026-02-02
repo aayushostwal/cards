@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import type { CreditCard } from '../../types/card';
 import { getChatCompletion } from '../../lib/groq';
 import type { ChatMessage } from '../../lib/groq';
@@ -145,8 +146,8 @@ export function AIChatBar({ cards }: AIChatBarProps) {
                       {message.role === 'user' ? (
                         <div className="text-sm whitespace-pre-wrap">{message.content}</div>
                       ) : (
-                        <div className="text-sm prose prose-sm prose-slate max-w-none prose-p:my-1 prose-ul:my-1 prose-ol:my-1 prose-li:my-0 prose-headings:my-2 prose-headings:text-slate-900 prose-strong:text-slate-900 prose-blockquote:text-slate-600 prose-blockquote:border-blue-500 prose-a:text-blue-600">
-                          <ReactMarkdown>{message.content}</ReactMarkdown>
+                        <div className="text-sm prose prose-sm prose-slate max-w-none prose-p:my-1 prose-ul:my-1 prose-ol:my-1 prose-li:my-0 prose-headings:my-2 prose-headings:text-slate-900 prose-strong:text-slate-900 prose-blockquote:text-slate-600 prose-blockquote:border-blue-500 prose-a:text-blue-600 prose-table:my-2 prose-th:bg-slate-100 prose-th:px-2 prose-th:py-1 prose-td:px-2 prose-td:py-1 prose-table:border-collapse prose-table:text-xs">
+                          <ReactMarkdown remarkPlugins={[remarkGfm]}>{message.content}</ReactMarkdown>
                         </div>
                       )}
                     </div>
