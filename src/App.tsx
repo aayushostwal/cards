@@ -1,21 +1,53 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CardGrid } from './components/cards/CardGrid';
 import { CardComparison } from './components/cards/CardComparison';
 import { FilterPanel } from './components/dashboard/FilterPanel';
 import { AIChatBar } from './components/ai/AIChatBar';
 import { ContactPage } from './components/contact/ContactPage';
+import { HomePage } from './components/home/HomePage';
 import type { CreditCard, CardFilters } from './types/card';
 import cardsData from './data/cards.json';
 import { CreditCard as CreditCardIcon, BarChart3, GitCompare, SlidersHorizontal, X, Mail } from 'lucide-react';
 
-type Tab = 'browse' | 'compare' | 'contact';
+type Tab = 'home' | 'browse' | 'compare' | 'contact';
+
+// Cookie helper functions
+const getCookie = (name: string): string | null => {
+  const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+  return match ? match[2] : null;
+};
+
+const setCookie = (name: string, value: string, days: number) => {
+  const expires = new Date(Date.now() + days * 864e5).toUTCString();
+  document.cookie = `${name}=${value}; expires=${expires}; path=/; SameSite=Lax`;
+};
 
 function App() {
-  const [activeTab, setActiveTab] = useState<Tab>('browse');
+  const [activeTab, setActiveTab] = useState<Tab>('home');
   const [filters, setFilters] = useState<CardFilters>({});
   const [selectedCards, setSelectedCards] = useState<string[]>([]);
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const cards = cardsData.cards as CreditCard[];
+
+  // Check cookie on mount to determine if we should skip home page
+  useEffect(() => {
+    const skipHome = getCookie('skipHomePage');
+    if (skipHome === 'true') {
+      setActiveTab('browse');
+    }
+  }, []);
+
+  const handleEnterFromHome = () => {
+    setActiveTab('browse');
+  };
+
+  const handleSkipNextTime = (skip: boolean) => {
+    if (skip) {
+      setCookie('skipHomePage', 'true', 365); // Remember for 1 year
+    } else {
+      setCookie('skipHomePage', 'false', 365);
+    }
+  };
 
   const filteredCards = cards.filter(card => {
     if (filters.issuer?.length && !filters.issuer.includes(card.basicInfo.issuer)) return false;
@@ -45,24 +77,37 @@ function App() {
     v !== undefined && (Array.isArray(v) ? v.length > 0 : true)
   ).length;
 
+  // Show home page
+  if (activeTab === 'home') {
+    return (
+      <HomePage 
+        onEnter={handleEnterFromHome} 
+        onSkipNextTime={handleSkipNextTime} 
+      />
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 pb-20">
       {/* Header */}
       <header className="bg-white border-b border-slate-200 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-14 sm:h-16">
-            <div className="flex items-center gap-2 sm:gap-3">
+            <button 
+              onClick={() => setActiveTab('home')}
+              className="flex items-center gap-2 sm:gap-3 hover:opacity-80 transition-opacity"
+            >
               <div className="bg-gradient-to-br from-blue-500 to-purple-600 p-1.5 sm:p-2 rounded-xl shadow-md">
                 <CreditCardIcon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
-              <div>
+              <div className="text-left">
                 <h1 className="text-lg sm:text-xl font-bold">
                   <span className="text-slate-900">Card</span>
                   <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Compare</span>
                 </h1>
                 <p className="text-xs text-slate-500 hidden sm:block">Compare 50+ Credit Cards</p>
               </div>
-            </div>
+            </button>
             
             {/* Navigation Tabs */}
             <nav className="flex gap-1">
