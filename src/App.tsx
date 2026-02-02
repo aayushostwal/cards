@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { CardGrid } from './components/cards/CardGrid';
 import { CardComparison } from './components/cards/CardComparison';
 import { FilterPanel } from './components/dashboard/FilterPanel';
@@ -6,21 +6,18 @@ import { AISearchHero } from './components/ai/AISearchHero';
 import { ContactPage } from './components/contact/ContactPage';
 import type { CreditCard, CardFilters } from './types/card';
 import cardsData from './data/cards.json';
-import { CreditCard as CreditCardIcon, BarChart3, GitCompare, SlidersHorizontal, X, Mail, Sparkles } from 'lucide-react';
+import { CreditCard as CreditCardIcon, BarChart3, GitCompare, SlidersHorizontal, X, Mail, Bot } from 'lucide-react';
 
+type View = 'ai' | 'browse';
 type Tab = 'browse' | 'compare' | 'contact';
 
 function App() {
+  const [currentView, setCurrentView] = useState<View>('ai');
   const [activeTab, setActiveTab] = useState<Tab>('browse');
   const [filters, setFilters] = useState<CardFilters>({});
   const [selectedCards, setSelectedCards] = useState<string[]>([]);
   const [showMobileFilters, setShowMobileFilters] = useState(false);
-  const browseRef = useRef<HTMLDivElement>(null);
   const cards = cardsData.cards as CreditCard[];
-
-  const scrollToBrowse = () => {
-    browseRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
 
   const filteredCards = cards.filter(card => {
     if (filters.issuer?.length && !filters.issuer.includes(card.basicInfo.issuer)) return false;
@@ -50,42 +47,42 @@ function App() {
     v !== undefined && (Array.isArray(v) ? v.length > 0 : true)
   ).length;
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
-      {/* AI Search Hero - Always at the top */}
-      <AISearchHero cards={cards} onScrollToBrowse={scrollToBrowse} />
+  // AI View - Full Screen Chat
+  if (currentView === 'ai') {
+    return <AISearchHero cards={cards} onGoToBrowse={() => setCurrentView('browse')} />;
+  }
 
-      {/* Navigation Bar */}
-      <div ref={browseRef} className="bg-white border-b border-slate-200 sticky top-0 z-40">
+  // Browse View - Manual Browsing
+  return (
+    <div className="min-h-screen bg-slate-50">
+      {/* Header */}
+      <header className="bg-white border-b border-slate-200 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-14 sm:h-16">
             <div className="flex items-center gap-2 sm:gap-3">
-              <div className="bg-gradient-to-br from-blue-500 to-purple-600 p-1.5 sm:p-2 rounded-xl shadow-md">
-                <CreditCardIcon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+              <div className="w-9 h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
+                <CreditCardIcon className="w-5 h-5 text-white" />
               </div>
-              <div className="text-left">
-                <h2 className="text-lg sm:text-xl font-bold">
-                  <span className="text-slate-900">Card</span>
-                  <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Compare</span>
-                </h2>
-                <p className="text-xs text-slate-500 hidden sm:block">Manual Browsing</p>
+              <div>
+                <h1 className="text-lg sm:text-xl font-bold text-slate-900">CardCompare</h1>
+                <p className="text-xs text-slate-500 hidden sm:block">50+ Credit Cards</p>
               </div>
             </div>
             
-            {/* Navigation Tabs */}
-            <nav className="flex gap-1">
+            {/* Navigation */}
+            <nav className="flex items-center gap-1">
               <button
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-lg text-sm font-medium text-slate-600 hover:bg-purple-100 hover:text-purple-700 transition-colors"
+                onClick={() => setCurrentView('ai')}
+                className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-lg text-sm font-medium bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 transition-colors"
               >
-                <Sparkles className="w-4 h-4" />
+                <Bot className="w-4 h-4" />
                 <span className="hidden sm:inline">Ask AI</span>
               </button>
               <button
                 onClick={() => setActiveTab('browse')}
                 className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                   activeTab === 'browse'
-                    ? 'bg-blue-100 text-blue-700'
+                    ? 'bg-slate-100 text-slate-900'
                     : 'text-slate-600 hover:bg-slate-100'
                 }`}
               >
@@ -96,7 +93,7 @@ function App() {
                 onClick={() => setActiveTab('compare')}
                 className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                   activeTab === 'compare'
-                    ? 'bg-blue-100 text-blue-700'
+                    ? 'bg-slate-100 text-slate-900'
                     : 'text-slate-600 hover:bg-slate-100'
                 }`}
               >
@@ -112,7 +109,7 @@ function App() {
                 onClick={() => setActiveTab('contact')}
                 className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                   activeTab === 'contact'
-                    ? 'bg-blue-100 text-blue-700'
+                    ? 'bg-slate-100 text-slate-900'
                     : 'text-slate-600 hover:bg-slate-100'
                 }`}
               >
@@ -122,16 +119,16 @@ function App() {
             </nav>
           </div>
         </div>
-      </div>
+      </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {activeTab === 'browse' && (
           <>
             {/* Section Header */}
             <div className="mb-6">
               <h2 className="text-2xl font-bold text-slate-900 mb-1">Browse All Cards</h2>
-              <p className="text-slate-500">Filter and explore 50+ credit cards manually</p>
+              <p className="text-slate-500">Filter and explore 50+ credit cards</p>
             </div>
 
             {/* Mobile Filter Button */}
@@ -182,17 +179,15 @@ function App() {
 
             {/* Mobile Filters Bottom Sheet */}
             {showMobileFilters && (
-              <div className="fixed inset-0 bg-black/50 z-[55] lg:hidden animate-fade-in" onClick={() => setShowMobileFilters(false)}>
+              <div className="fixed inset-0 bg-black/50 z-50 lg:hidden animate-fade-in" onClick={() => setShowMobileFilters(false)}>
                 <div 
                   className="absolute left-0 right-0 bottom-0 bg-white rounded-t-2xl shadow-2xl max-h-[80vh] flex flex-col animate-modal-enter"
                   onClick={e => e.stopPropagation()}
                 >
-                  {/* Handle */}
                   <div className="flex justify-center pt-3 pb-2">
                     <div className="w-10 h-1 bg-slate-300 rounded-full" />
                   </div>
                   
-                  {/* Header */}
                   <div className="flex items-center justify-between px-4 pb-3 border-b border-slate-200">
                     <h3 className="font-semibold text-slate-900">Filters</h3>
                     <div className="flex items-center gap-2">
@@ -213,7 +208,6 @@ function App() {
                     </div>
                   </div>
                   
-                  {/* Content */}
                   <div className="flex-1 overflow-y-auto p-4">
                     <FilterPanel 
                       filters={filters} 
@@ -223,7 +217,6 @@ function App() {
                     />
                   </div>
                   
-                  {/* Footer */}
                   <div className="p-4 border-t border-slate-200 bg-white pb-8">
                     <button
                       onClick={() => setShowMobileFilters(false)}
@@ -256,8 +249,7 @@ function App() {
       <footer className="bg-white border-t border-slate-200 py-6 mt-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center text-xs sm:text-sm text-slate-500">
-            Data last updated: {cardsData.lastUpdated} • 
-            Always verify on bank's official website
+            Data last updated: {cardsData.lastUpdated} • Always verify on bank's official website
           </p>
         </div>
       </footer>
