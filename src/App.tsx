@@ -3,11 +3,12 @@ import { CardGrid } from './components/cards/CardGrid';
 import { CardComparison } from './components/cards/CardComparison';
 import { FilterPanel } from './components/dashboard/FilterPanel';
 import { AIChatBar } from './components/ai/AIChatBar';
+import { ContactPage } from './components/contact/ContactPage';
 import type { CreditCard, CardFilters } from './types/card';
 import cardsData from './data/cards.json';
-import { CreditCard as CreditCardIcon, BarChart3, GitCompare, SlidersHorizontal, X } from 'lucide-react';
+import { CreditCard as CreditCardIcon, BarChart3, GitCompare, SlidersHorizontal, X, Mail } from 'lucide-react';
 
-type Tab = 'browse' | 'compare';
+type Tab = 'browse' | 'compare' | 'contact';
 
 function App() {
   const [activeTab, setActiveTab] = useState<Tab>('browse');
@@ -91,6 +92,17 @@ function App() {
                     {selectedCards.length}
                   </span>
                 )}
+              </button>
+              <button
+                onClick={() => setActiveTab('contact')}
+                className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  activeTab === 'contact'
+                    ? 'bg-blue-100 text-blue-700'
+                    : 'text-slate-600 hover:bg-slate-100'
+                }`}
+              >
+                <Mail className="w-4 h-4" />
+                <span className="hidden sm:inline">Contact</span>
               </button>
             </nav>
           </div>
@@ -182,6 +194,10 @@ function App() {
             onRemoveCard={(id) => setSelectedCards(prev => prev.filter(cid => cid !== id))}
             onAddCard={(id) => toggleCardSelection(id)}
           />
+        )}
+
+        {activeTab === 'contact' && (
+          <ContactPage />
         )}
       </main>
 
