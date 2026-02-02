@@ -31,7 +31,7 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
 
   return (
     <div 
-      className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm"
+      className="fixed inset-0 bg-black/60 z-[60] flex items-center justify-center p-4 backdrop-blur-sm"
       onClick={onClose}
     >
       <div 

@@ -1,5 +1,5 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "lastUpdated": "2026-02-02",
   "cards": [
     {
@@ -2441,6 +2441,1283 @@
         "emiConversion": true
       },
       "metadata": { "sourceUrl": "https://www.kotak.com", "scrapedAt": "2026-02-02T10:00:00Z", "confidence": 0.95, "manualReview": false }
+    },
+    {
+      "id": "bob-premier",
+      "basicInfo": {
+        "name": "Bank of Baroda Premier Credit Card",
+        "issuer": "Bank of Baroda",
+        "network": ["Visa"],
+        "cardType": "Premium",
+        "imageUrl": "",
+        "applyUrl": "https://www.bankofbaroda.in/personal-banking/credit-cards/premier-credit-card",
+        "description": "Premium card with 5x rewards on travel and dining"
+      },
+      "fees": {
+        "joiningFee": 2499,
+        "joiningFeeWaiver": null,
+        "annualFee": 2499,
+        "annualFeeWaiver": "Spend ₹3L/year",
+        "renewalFee": 2499,
+        "addOnCardFee": 0,
+        "fuelSurchargeWaiver": { "enabled": true, "maxPerMonth": 250, "minTransaction": 400, "maxTransaction": 4000 }
+      },
+      "eligibility": {
+        "minSalary": 50000,
+        "minITR": 600000,
+        "minCibilScore": 720,
+        "employmentType": ["Salaried", "Self-Employed"],
+        "minAge": 21,
+        "maxAge": 60,
+        "existingRelationship": false
+      },
+      "rewards": {
+        "rewardRate": 2,
+        "rewardUnit": "points",
+        "pointValue": 0.25,
+        "acceleratedCategories": [
+          { "category": "Travel/Dining", "rate": 5, "cap": null }
+        ],
+        "welcomeBonus": { "points": 5000, "value": 1250, "condition": "On first transaction" },
+        "milestoneRewards": [
+          { "spend": 300000, "reward": "5,000 bonus points", "period": "yearly" }
+        ],
+        "redemptionOptions": ["BOB Rewards", "Vouchers"]
+      },
+      "loungeAccess": {
+        "domestic": { "freeVisits": 8, "perYear": true, "program": "DreamFolks", "guestAccess": false },
+        "international": { "freeVisits": 4, "perYear": true, "program": "Priority Pass", "guestAccess": false },
+        "railwayLounge": null
+      },
+      "discountsAndOffers": {
+        "platforms": [],
+        "categories": [
+          { "category": "Movies", "partner": "BookMyShow", "offer": "Buy 1 Get 1" }
+        ]
+      },
+      "charges": {
+        "interestRate": { "monthly": 3.35, "annual": 40.20 },
+        "cashAdvanceFee": { "percent": 2.5, "min": 500 },
+        "foreignTxnFee": 3.5,
+        "lateFee": 750,
+        "overLimitFee": 500,
+        "emiFee": { "processingPercent": 1.0, "minAmount": 199 },
+        "cardReplacementFee": 200,
+        "statementFee": 50
+      },
+      "features": {
+        "contactless": true,
+        "virtualCard": true,
+        "addOnCards": 3,
+        "insuranceCover": { "airAccident": 5000000, "lostCard": 100000, "purchaseProtection": 50000 },
+        "concierge": false,
+        "golfAccess": null,
+        "zeroLiability": true,
+        "instantIssuance": false,
+        "emiConversion": true
+      },
+      "metadata": { "sourceUrl": "https://www.bankofbaroda.in", "scrapedAt": "2026-02-02T10:00:00Z", "confidence": 0.90, "manualReview": false }
+    },
+    {
+      "id": "bob-easy",
+      "basicInfo": {
+        "name": "Bank of Baroda Easy Credit Card",
+        "issuer": "Bank of Baroda",
+        "network": ["RuPay"],
+        "cardType": "Entry Level",
+        "imageUrl": "",
+        "applyUrl": "https://www.bankofbaroda.in/personal-banking/credit-cards/easy-credit-card",
+        "description": "Basic card for everyday spends with low eligibility requirements"
+      },
+      "fees": {
+        "joiningFee": 0,
+        "joiningFeeWaiver": null,
+        "annualFee": 299,
+        "annualFeeWaiver": "Spend ₹50,000/year",
+        "renewalFee": 299,
+        "addOnCardFee": 0,
+        "fuelSurchargeWaiver": { "enabled": true, "maxPerMonth": 100, "minTransaction": 400, "maxTransaction": 4000 }
+      },
+      "eligibility": {
+        "minSalary": 15000,
+        "minITR": 180000,
+        "minCibilScore": 650,
+        "employmentType": ["Salaried", "Self-Employed"],
+        "minAge": 21,
+        "maxAge": 60,
+        "existingRelationship": false
+      },
+      "rewards": {
+        "rewardRate": 1,
+        "rewardUnit": "points",
+        "pointValue": 0.20,
+        "acceleratedCategories": [],
+        "welcomeBonus": null,
+        "milestoneRewards": [],
+        "redemptionOptions": ["BOB Rewards", "Statement credit"]
+      },
+      "loungeAccess": {
+        "domestic": null,
+        "international": null,
+        "railwayLounge": null
+      },
+      "discountsAndOffers": {
+        "platforms": [],
+        "categories": []
+      },
+      "charges": {
+        "interestRate": { "monthly": 3.49, "annual": 41.88 },
+        "cashAdvanceFee": { "percent": 2.5, "min": 300 },
+        "foreignTxnFee": 3.5,
+        "lateFee": 500,
+        "overLimitFee": 500,
+        "emiFee": { "processingPercent": 1.5, "minAmount": 199 },
+        "cardReplacementFee": 100,
+        "statementFee": 50
+      },
+      "features": {
+        "contactless": true,
+        "virtualCard": false,
+        "addOnCards": 1,
+        "insuranceCover": { "airAccident": null, "lostCard": 25000, "purchaseProtection": null },
+        "concierge": false,
+        "golfAccess": null,
+        "zeroLiability": true,
+        "instantIssuance": false,
+        "emiConversion": true
+      },
+      "metadata": { "sourceUrl": "https://www.bankofbaroda.in", "scrapedAt": "2026-02-02T10:00:00Z", "confidence": 0.90, "manualReview": false }
+    },
+    {
+      "id": "bob-select",
+      "basicInfo": {
+        "name": "Bank of Baroda Select Credit Card",
+        "issuer": "Bank of Baroda",
+        "network": ["Visa", "Mastercard"],
+        "cardType": "Super Premium",
+        "imageUrl": "",
+        "applyUrl": "https://www.bankofbaroda.in/personal-banking/credit-cards/select-credit-card",
+        "description": "Super premium with unlimited lounge access and golf benefits"
+      },
+      "fees": {
+        "joiningFee": 4999,
+        "joiningFeeWaiver": null,
+        "annualFee": 4999,
+        "annualFeeWaiver": "Spend ₹6L/year",
+        "renewalFee": 4999,
+        "addOnCardFee": 0,
+        "fuelSurchargeWaiver": { "enabled": true, "maxPerMonth": 500, "minTransaction": 400, "maxTransaction": 5000 }
+      },
+      "eligibility": {
+        "minSalary": 100000,
+        "minITR": 1200000,
+        "minCibilScore": 750,
+        "employmentType": ["Salaried", "Self-Employed"],
+        "minAge": 21,
+        "maxAge": 60,
+        "existingRelationship": false
+      },
+      "rewards": {
+        "rewardRate": 4,
+        "rewardUnit": "points",
+        "pointValue": 0.30,
+        "acceleratedCategories": [
+          { "category": "International", "rate": 6, "cap": null },
+          { "category": "Travel/Dining", "rate": 5, "cap": null }
+        ],
+        "welcomeBonus": { "points": 10000, "value": 3000, "condition": "On first spend" },
+        "milestoneRewards": [
+          { "spend": 600000, "reward": "Annual fee waiver + vouchers", "period": "yearly" }
+        ],
+        "redemptionOptions": ["BOB Rewards", "Airmiles", "Hotels"]
+      },
+      "loungeAccess": {
+        "domestic": { "freeVisits": 16, "perYear": true, "program": "DreamFolks", "guestAccess": true, "guestFee": 1000 },
+        "international": { "freeVisits": 8, "perYear": true, "program": "Priority Pass", "guestAccess": false },
+        "railwayLounge": { "enabled": true, "visits": 4 }
+      },
+      "discountsAndOffers": {
+        "platforms": [],
+        "categories": [
+          { "category": "Golf", "partner": "Various", "offer": "2 complimentary rounds/quarter" }
+        ]
+      },
+      "charges": {
+        "interestRate": { "monthly": 3.35, "annual": 40.20 },
+        "cashAdvanceFee": { "percent": 2.5, "min": 500 },
+        "foreignTxnFee": 2.0,
+        "lateFee": 950,
+        "overLimitFee": 500,
+        "emiFee": { "processingPercent": 1.0, "minAmount": 199 },
+        "cardReplacementFee": 0,
+        "statementFee": 0
+      },
+      "features": {
+        "contactless": true,
+        "virtualCard": true,
+        "addOnCards": 4,
+        "insuranceCover": { "airAccident": 15000000, "lostCard": 300000, "purchaseProtection": 150000, "travelInsurance": 3000000 },
+        "concierge": true,
+        "golfAccess": { "enabled": true, "freeGames": 4 },
+        "zeroLiability": true,
+        "instantIssuance": false,
+        "emiConversion": true
+      },
+      "metadata": { "sourceUrl": "https://www.bankofbaroda.in", "scrapedAt": "2026-02-02T10:00:00Z", "confidence": 0.90, "manualReview": false }
+    },
+    {
+      "id": "yes-first-exclusive",
+      "basicInfo": {
+        "name": "YES FIRST Exclusive Credit Card",
+        "issuer": "YES Bank",
+        "network": ["Visa", "Mastercard"],
+        "cardType": "Super Premium",
+        "imageUrl": "",
+        "applyUrl": "https://www.yesbank.in/personal-banking/yes-first/credit-cards/yes-first-exclusive",
+        "description": "Super premium with unlimited lounge access and 24x7 concierge"
+      },
+      "fees": {
+        "joiningFee": 10000,
+        "joiningFeeWaiver": null,
+        "annualFee": 10000,
+        "annualFeeWaiver": "Spend ₹10L/year",
+        "renewalFee": 10000,
+        "addOnCardFee": 0,
+        "fuelSurchargeWaiver": { "enabled": true, "maxPerMonth": 500, "minTransaction": 400, "maxTransaction": 5000 }
+      },
+      "eligibility": {
+        "minSalary": 200000,
+        "minITR": 2400000,
+        "minCibilScore": 780,
+        "employmentType": ["Salaried", "Self-Employed"],
+        "minAge": 21,
+        "maxAge": 60,
+        "existingRelationship": true
+      },
+      "rewards": {
+        "rewardRate": 4,
+        "rewardUnit": "points",
+        "pointValue": 0.50,
+        "acceleratedCategories": [
+          { "category": "Travel", "rate": 12, "cap": null },
+          { "category": "International", "rate": 8, "cap": null }
+        ],
+        "welcomeBonus": { "points": 50000, "value": 25000, "condition": "On first transaction" },
+        "milestoneRewards": [
+          { "spend": 500000, "reward": "Taj voucher ₹10,000", "period": "yearly" },
+          { "spend": 1000000, "reward": "Annual fee reversal", "period": "yearly" }
+        ],
+        "redemptionOptions": ["YES Rewards", "Airmiles", "Hotels"]
+      },
+      "loungeAccess": {
+        "domestic": { "freeVisits": 999, "perYear": true, "program": "DreamFolks", "guestAccess": true, "guestFee": 0 },
+        "international": { "freeVisits": 12, "perYear": true, "program": "Priority Pass", "guestAccess": true, "guestFee": 2000 },
+        "railwayLounge": { "enabled": true, "visits": 8 }
+      },
+      "discountsAndOffers": {
+        "platforms": [],
+        "categories": [
+          { "category": "Golf", "partner": "Various", "offer": "Complimentary rounds" },
+          { "category": "Spa", "partner": "Various", "offer": "Complimentary sessions" }
+        ]
+      },
+      "charges": {
+        "interestRate": { "monthly": 3.35, "annual": 40.20 },
+        "cashAdvanceFee": { "percent": 2.5, "min": 500 },
+        "foreignTxnFee": 1.75,
+        "lateFee": 1100,
+        "overLimitFee": 600,
+        "emiFee": { "processingPercent": 1.0, "minAmount": 199 },
+        "cardReplacementFee": 0,
+        "statementFee": 0
+      },
+      "features": {
+        "contactless": true,
+        "virtualCard": true,
+        "addOnCards": 5,
+        "insuranceCover": { "airAccident": 25000000, "lostCard": 500000, "purchaseProtection": 200000, "travelInsurance": 7500000 },
+        "concierge": true,
+        "golfAccess": { "enabled": true, "freeGames": 6 },
+        "zeroLiability": true,
+        "instantIssuance": false,
+        "emiConversion": true
+      },
+      "metadata": { "sourceUrl": "https://www.yesbank.in", "scrapedAt": "2026-02-02T10:00:00Z", "confidence": 0.92, "manualReview": false }
+    },
+    {
+      "id": "yes-first-preferred",
+      "basicInfo": {
+        "name": "YES FIRST Preferred Credit Card",
+        "issuer": "YES Bank",
+        "network": ["Visa", "Mastercard"],
+        "cardType": "Premium",
+        "imageUrl": "",
+        "applyUrl": "https://www.yesbank.in/personal-banking/yes-first/credit-cards/yes-first-preferred",
+        "description": "Premium card with excellent travel rewards and lounge access"
+      },
+      "fees": {
+        "joiningFee": 2499,
+        "joiningFeeWaiver": null,
+        "annualFee": 2499,
+        "annualFeeWaiver": "Spend ₹2.5L/year",
+        "renewalFee": 2499,
+        "addOnCardFee": 0,
+        "fuelSurchargeWaiver": { "enabled": true, "maxPerMonth": 300, "minTransaction": 400, "maxTransaction": 4000 }
+      },
+      "eligibility": {
+        "minSalary": 60000,
+        "minITR": 720000,
+        "minCibilScore": 730,
+        "employmentType": ["Salaried", "Self-Employed"],
+        "minAge": 21,
+        "maxAge": 60,
+        "existingRelationship": false
+      },
+      "rewards": {
+        "rewardRate": 3,
+        "rewardUnit": "points",
+        "pointValue": 0.35,
+        "acceleratedCategories": [
+          { "category": "Travel", "rate": 9, "cap": null },
+          { "category": "Dining", "rate": 6, "cap": null }
+        ],
+        "welcomeBonus": { "points": 10000, "value": 3500, "condition": "On first spend" },
+        "milestoneRewards": [
+          { "spend": 250000, "reward": "5,000 bonus points", "period": "yearly" }
+        ],
+        "redemptionOptions": ["YES Rewards", "Vouchers"]
+      },
+      "loungeAccess": {
+        "domestic": { "freeVisits": 8, "perYear": true, "program": "DreamFolks", "guestAccess": false },
+        "international": { "freeVisits": 4, "perYear": true, "program": "Priority Pass", "guestAccess": false },
+        "railwayLounge": { "enabled": true, "visits": 4 }
+      },
+      "discountsAndOffers": {
+        "platforms": [],
+        "categories": [
+          { "category": "Movies", "partner": "BookMyShow", "offer": "Buy 1 Get 1" }
+        ]
+      },
+      "charges": {
+        "interestRate": { "monthly": 3.40, "annual": 40.80 },
+        "cashAdvanceFee": { "percent": 2.5, "min": 500 },
+        "foreignTxnFee": 2.5,
+        "lateFee": 850,
+        "overLimitFee": 500,
+        "emiFee": { "processingPercent": 1.0, "minAmount": 199 },
+        "cardReplacementFee": 200,
+        "statementFee": 0
+      },
+      "features": {
+        "contactless": true,
+        "virtualCard": true,
+        "addOnCards": 3,
+        "insuranceCover": { "airAccident": 10000000, "lostCard": 200000, "purchaseProtection": 100000, "travelInsurance": 2500000 },
+        "concierge": true,
+        "golfAccess": { "enabled": true, "freeGames": 2 },
+        "zeroLiability": true,
+        "instantIssuance": false,
+        "emiConversion": true
+      },
+      "metadata": { "sourceUrl": "https://www.yesbank.in", "scrapedAt": "2026-02-02T10:00:00Z", "confidence": 0.92, "manualReview": false }
+    },
+    {
+      "id": "yes-prosperity-rewards",
+      "basicInfo": {
+        "name": "YES Prosperity Rewards Credit Card",
+        "issuer": "YES Bank",
+        "network": ["Visa"],
+        "cardType": "Entry Level",
+        "imageUrl": "",
+        "applyUrl": "https://www.yesbank.in/personal-banking/cards/credit-cards/yes-prosperity-rewards",
+        "description": "Entry level card with 10x rewards on dining and grocery"
+      },
+      "fees": {
+        "joiningFee": 499,
+        "joiningFeeWaiver": "Usually waived",
+        "annualFee": 499,
+        "annualFeeWaiver": "Spend ₹1L/year",
+        "renewalFee": 499,
+        "addOnCardFee": 0,
+        "fuelSurchargeWaiver": { "enabled": true, "maxPerMonth": 100, "minTransaction": 400, "maxTransaction": 4000 }
+      },
+      "eligibility": {
+        "minSalary": 25000,
+        "minITR": 300000,
+        "minCibilScore": 700,
+        "employmentType": ["Salaried", "Self-Employed"],
+        "minAge": 21,
+        "maxAge": 60,
+        "existingRelationship": false
+      },
+      "rewards": {
+        "rewardRate": 2,
+        "rewardUnit": "points",
+        "pointValue": 0.25,
+        "acceleratedCategories": [
+          { "category": "Dining", "rate": 10, "cap": null },
+          { "category": "Grocery", "rate": 10, "cap": null }
+        ],
+        "welcomeBonus": { "points": 2000, "value": 500, "condition": "On first spend" },
+        "milestoneRewards": [],
+        "redemptionOptions": ["YES Rewards", "Statement credit"]
+      },
+      "loungeAccess": {
+        "domestic": { "freeVisits": 4, "perYear": true, "program": "DreamFolks", "guestAccess": false },
+        "international": null,
+        "railwayLounge": null
+      },
+      "discountsAndOffers": {
+        "platforms": [],
+        "categories": []
+      },
+      "charges": {
+        "interestRate": { "monthly": 3.49, "annual": 41.88 },
+        "cashAdvanceFee": { "percent": 2.5, "min": 500 },
+        "foreignTxnFee": 3.5,
+        "lateFee": 600,
+        "overLimitFee": 500,
+        "emiFee": { "processingPercent": 1.5, "minAmount": 199 },
+        "cardReplacementFee": 200,
+        "statementFee": 50
+      },
+      "features": {
+        "contactless": true,
+        "virtualCard": true,
+        "addOnCards": 2,
+        "insuranceCover": { "airAccident": 1000000, "lostCard": 50000, "purchaseProtection": null },
+        "concierge": false,
+        "golfAccess": null,
+        "zeroLiability": true,
+        "instantIssuance": true,
+        "emiConversion": true
+      },
+      "metadata": { "sourceUrl": "https://www.yesbank.in", "scrapedAt": "2026-02-02T10:00:00Z", "confidence": 0.92, "manualReview": false }
+    },
+    {
+      "id": "icici-mmt-platinum",
+      "basicInfo": {
+        "name": "ICICI MakeMyTrip Credit Card",
+        "issuer": "ICICI Bank",
+        "network": ["Visa"],
+        "cardType": "Premium",
+        "imageUrl": "",
+        "applyUrl": "https://www.icicibank.com/personal-banking/cards/credit-card/makemytrip-icici-credit-card",
+        "description": "Best for travel - 10% on MakeMyTrip flights, 5% on hotels"
+      },
+      "fees": {
+        "joiningFee": 500,
+        "joiningFeeWaiver": null,
+        "annualFee": 500,
+        "annualFeeWaiver": "Spend ₹2L/year",
+        "renewalFee": 500,
+        "addOnCardFee": 0,
+        "fuelSurchargeWaiver": { "enabled": true, "maxPerMonth": 200, "minTransaction": 400, "maxTransaction": 4000 }
+      },
+      "eligibility": {
+        "minSalary": 30000,
+        "minITR": 360000,
+        "minCibilScore": 720,
+        "employmentType": ["Salaried", "Self-Employed"],
+        "minAge": 21,
+        "maxAge": 60,
+        "existingRelationship": false
+      },
+      "rewards": {
+        "rewardRate": 2,
+        "rewardUnit": "points",
+        "pointValue": 0.50,
+        "acceleratedCategories": [
+          { "category": "MakeMyTrip Flights", "rate": 10, "cap": 1000 },
+          { "category": "MakeMyTrip Hotels", "rate": 5, "cap": 750 },
+          { "category": "Dining", "rate": 4, "cap": null }
+        ],
+        "welcomeBonus": { "points": null, "value": 1000, "condition": "MakeMyTrip voucher on first spend" },
+        "milestoneRewards": [
+          { "spend": 200000, "reward": "MMT voucher ₹3,000", "period": "yearly" }
+        ],
+        "redemptionOptions": ["MakeMyTrip", "Statement credit"]
+      },
+      "loungeAccess": {
+        "domestic": { "freeVisits": 4, "perYear": true, "program": "DreamFolks", "guestAccess": false },
+        "international": null,
+        "railwayLounge": null
+      },
+      "discountsAndOffers": {
+        "platforms": [
+          { "name": "MakeMyTrip", "discount": "10%/5%", "cap": 1000, "minSpend": null, "frequency": "per transaction" }
+        ],
+        "categories": []
+      },
+      "charges": {
+        "interestRate": { "monthly": 3.40, "annual": 40.80 },
+        "cashAdvanceFee": { "percent": 2.5, "min": 500 },
+        "foreignTxnFee": 3.5,
+        "lateFee": 750,
+        "overLimitFee": 500,
+        "emiFee": { "processingPercent": 1.0, "minAmount": 199 },
+        "cardReplacementFee": 200,
+        "statementFee": 50
+      },
+      "features": {
+        "contactless": true,
+        "virtualCard": true,
+        "addOnCards": 2,
+        "insuranceCover": { "airAccident": 1000000, "lostCard": 50000, "purchaseProtection": null },
+        "concierge": false,
+        "golfAccess": null,
+        "zeroLiability": true,
+        "instantIssuance": true,
+        "emiConversion": true
+      },
+      "metadata": { "sourceUrl": "https://www.icicibank.com", "scrapedAt": "2026-02-02T10:00:00Z", "confidence": 0.92, "manualReview": false }
+    },
+    {
+      "id": "kiwi-credit-card",
+      "basicInfo": {
+        "name": "Kiwi Credit Card",
+        "issuer": "Kiwi",
+        "network": ["Visa"],
+        "cardType": "Entry Level",
+        "imageUrl": "",
+        "applyUrl": "https://www.kiwi.money/",
+        "description": "Fintech card - turn any payment into EMI with 0% interest"
+      },
+      "fees": {
+        "joiningFee": 0,
+        "joiningFeeWaiver": null,
+        "annualFee": 0,
+        "annualFeeWaiver": null,
+        "renewalFee": 0,
+        "addOnCardFee": 0,
+        "fuelSurchargeWaiver": { "enabled": true, "maxPerMonth": 100, "minTransaction": 400, "maxTransaction": 4000 }
+      },
+      "eligibility": {
+        "minSalary": 15000,
+        "minITR": 180000,
+        "minCibilScore": 650,
+        "employmentType": ["Salaried", "Self-Employed"],
+        "minAge": 21,
+        "maxAge": 55,
+        "existingRelationship": false
+      },
+      "rewards": {
+        "rewardRate": 1,
+        "rewardUnit": "cashback",
+        "pointValue": 1.0,
+        "acceleratedCategories": [
+          { "category": "Online Shopping", "rate": 2, "cap": 500 }
+        ],
+        "welcomeBonus": null,
+        "milestoneRewards": [],
+        "redemptionOptions": ["Statement credit"]
+      },
+      "loungeAccess": {
+        "domestic": null,
+        "international": null,
+        "railwayLounge": null
+      },
+      "discountsAndOffers": {
+        "platforms": [],
+        "categories": []
+      },
+      "charges": {
+        "interestRate": { "monthly": 3.49, "annual": 41.88 },
+        "cashAdvanceFee": { "percent": 2.5, "min": 300 },
+        "foreignTxnFee": 3.5,
+        "lateFee": 500,
+        "overLimitFee": 500,
+        "emiFee": { "processingPercent": 0, "minAmount": 0 },
+        "cardReplacementFee": 200,
+        "statementFee": 0
+      },
+      "features": {
+        "contactless": true,
+        "virtualCard": true,
+        "addOnCards": 0,
+        "insuranceCover": { "airAccident": null, "lostCard": 25000, "purchaseProtection": null },
+        "concierge": false,
+        "golfAccess": null,
+        "zeroLiability": true,
+        "instantIssuance": true,
+        "emiConversion": true
+      },
+      "metadata": { "sourceUrl": "https://www.kiwi.money", "scrapedAt": "2026-02-02T10:00:00Z", "confidence": 0.88, "manualReview": true }
+    },
+    {
+      "id": "scapia-federal",
+      "basicInfo": {
+        "name": "Scapia Credit Card",
+        "issuer": "Scapia (Federal Bank)",
+        "network": ["Visa"],
+        "cardType": "Entry Level",
+        "imageUrl": "",
+        "applyUrl": "https://www.scapia.app/",
+        "description": "Zero forex markup travel card - 10% on flights via Scapia app"
+      },
+      "fees": {
+        "joiningFee": 0,
+        "joiningFeeWaiver": null,
+        "annualFee": 0,
+        "annualFeeWaiver": null,
+        "renewalFee": 0,
+        "addOnCardFee": 0,
+        "fuelSurchargeWaiver": { "enabled": true, "maxPerMonth": 200, "minTransaction": 400, "maxTransaction": 4000 }
+      },
+      "eligibility": {
+        "minSalary": 25000,
+        "minITR": 300000,
+        "minCibilScore": 700,
+        "employmentType": ["Salaried", "Self-Employed"],
+        "minAge": 21,
+        "maxAge": 60,
+        "existingRelationship": false
+      },
+      "rewards": {
+        "rewardRate": 1,
+        "rewardUnit": "points",
+        "pointValue": 1.0,
+        "acceleratedCategories": [
+          { "category": "Flights (Scapia)", "rate": 10, "cap": null },
+          { "category": "Hotels (Scapia)", "rate": 5, "cap": null },
+          { "category": "International", "rate": 2, "cap": null }
+        ],
+        "welcomeBonus": { "points": null, "value": 500, "condition": "On first flight booking" },
+        "milestoneRewards": [],
+        "redemptionOptions": ["Travel bookings", "Statement credit"]
+      },
+      "loungeAccess": {
+        "domestic": { "freeVisits": 4, "perYear": true, "program": "DreamFolks", "guestAccess": false },
+        "international": null,
+        "railwayLounge": null
+      },
+      "discountsAndOffers": {
+        "platforms": [
+          { "name": "Scapia Flights", "discount": "10%", "cap": null, "minSpend": null, "frequency": "per transaction" }
+        ],
+        "categories": []
+      },
+      "charges": {
+        "interestRate": { "monthly": 3.40, "annual": 40.80 },
+        "cashAdvanceFee": { "percent": 2.5, "min": 500 },
+        "foreignTxnFee": 0,
+        "lateFee": 500,
+        "overLimitFee": 500,
+        "emiFee": { "processingPercent": 1.5, "minAmount": 199 },
+        "cardReplacementFee": 200,
+        "statementFee": 0
+      },
+      "features": {
+        "contactless": true,
+        "virtualCard": true,
+        "addOnCards": 1,
+        "insuranceCover": { "airAccident": null, "lostCard": 50000, "purchaseProtection": null },
+        "concierge": false,
+        "golfAccess": null,
+        "zeroLiability": true,
+        "instantIssuance": true,
+        "emiConversion": true
+      },
+      "metadata": { "sourceUrl": "https://www.scapia.app", "scrapedAt": "2026-02-02T10:00:00Z", "confidence": 0.92, "manualReview": false }
+    },
+    {
+      "id": "federal-imperio",
+      "basicInfo": {
+        "name": "Federal Bank Imperio Credit Card",
+        "issuer": "Federal Bank",
+        "network": ["Visa"],
+        "cardType": "Super Premium",
+        "imageUrl": "",
+        "applyUrl": "https://www.federalbank.co.in/imperio-credit-card",
+        "description": "Super premium with 8x rewards on travel and lifestyle spending"
+      },
+      "fees": {
+        "joiningFee": 4999,
+        "joiningFeeWaiver": null,
+        "annualFee": 4999,
+        "annualFeeWaiver": "Spend ₹5L/year",
+        "renewalFee": 4999,
+        "addOnCardFee": 0,
+        "fuelSurchargeWaiver": { "enabled": true, "maxPerMonth": 400, "minTransaction": 400, "maxTransaction": 5000 }
+      },
+      "eligibility": {
+        "minSalary": 100000,
+        "minITR": 1200000,
+        "minCibilScore": 750,
+        "employmentType": ["Salaried", "Self-Employed"],
+        "minAge": 21,
+        "maxAge": 60,
+        "existingRelationship": false
+      },
+      "rewards": {
+        "rewardRate": 3,
+        "rewardUnit": "points",
+        "pointValue": 0.35,
+        "acceleratedCategories": [
+          { "category": "Travel", "rate": 8, "cap": null },
+          { "category": "Dining", "rate": 6, "cap": null }
+        ],
+        "welcomeBonus": { "points": 10000, "value": 3500, "condition": "On first transaction" },
+        "milestoneRewards": [
+          { "spend": 500000, "reward": "E-voucher ₹5,000", "period": "yearly" }
+        ],
+        "redemptionOptions": ["Federal Rewards", "Vouchers", "Statement credit"]
+      },
+      "loungeAccess": {
+        "domestic": { "freeVisits": 12, "perYear": true, "program": "DreamFolks", "guestAccess": true, "guestFee": 1000 },
+        "international": { "freeVisits": 6, "perYear": true, "program": "Priority Pass", "guestAccess": false },
+        "railwayLounge": { "enabled": true, "visits": 4 }
+      },
+      "discountsAndOffers": {
+        "platforms": [],
+        "categories": [
+          { "category": "Golf", "partner": "Various", "offer": "2 complimentary rounds/quarter" }
+        ]
+      },
+      "charges": {
+        "interestRate": { "monthly": 3.35, "annual": 40.20 },
+        "cashAdvanceFee": { "percent": 2.5, "min": 500 },
+        "foreignTxnFee": 1.5,
+        "lateFee": 950,
+        "overLimitFee": 500,
+        "emiFee": { "processingPercent": 1.0, "minAmount": 199 },
+        "cardReplacementFee": 0,
+        "statementFee": 0
+      },
+      "features": {
+        "contactless": true,
+        "virtualCard": true,
+        "addOnCards": 4,
+        "insuranceCover": { "airAccident": 10000000, "lostCard": 200000, "purchaseProtection": 100000, "travelInsurance": 2500000 },
+        "concierge": true,
+        "golfAccess": { "enabled": true, "freeGames": 4 },
+        "zeroLiability": true,
+        "instantIssuance": false,
+        "emiConversion": true
+      },
+      "metadata": { "sourceUrl": "https://www.federalbank.co.in", "scrapedAt": "2026-02-02T10:00:00Z", "confidence": 0.90, "manualReview": false }
+    },
+    {
+      "id": "sc-ultimate",
+      "basicInfo": {
+        "name": "Standard Chartered Ultimate Credit Card",
+        "issuer": "Standard Chartered",
+        "network": ["Visa"],
+        "cardType": "Super Premium",
+        "imageUrl": "",
+        "applyUrl": "https://www.sc.com/in/credit-cards/ultimate-credit-card/",
+        "description": "3.3% unlimited rewards with no cap - best for high spenders"
+      },
+      "fees": {
+        "joiningFee": 5000,
+        "joiningFeeWaiver": null,
+        "annualFee": 5000,
+        "annualFeeWaiver": "Spend ₹6L/year",
+        "renewalFee": 5000,
+        "addOnCardFee": 0,
+        "fuelSurchargeWaiver": { "enabled": true, "maxPerMonth": 500, "minTransaction": 750, "maxTransaction": 15000 }
+      },
+      "eligibility": {
+        "minSalary": 120000,
+        "minITR": 1440000,
+        "minCibilScore": 750,
+        "employmentType": ["Salaried", "Self-Employed"],
+        "minAge": 21,
+        "maxAge": 60,
+        "existingRelationship": false
+      },
+      "rewards": {
+        "rewardRate": 3.3,
+        "rewardUnit": "points",
+        "pointValue": 1.0,
+        "acceleratedCategories": [
+          { "category": "All Spends", "rate": 3.3, "cap": null }
+        ],
+        "welcomeBonus": { "points": 10000, "value": 10000, "condition": "On first transaction" },
+        "milestoneRewards": [
+          { "spend": 600000, "reward": "Annual fee reversal", "period": "yearly" }
+        ],
+        "redemptionOptions": ["360° Rewards catalogue", "Miles", "Statement credit"]
+      },
+      "loungeAccess": {
+        "domestic": { "freeVisits": 8, "perYear": true, "program": "DreamFolks", "guestAccess": true, "guestFee": 1500 },
+        "international": { "freeVisits": 4, "perYear": true, "program": "Priority Pass", "guestAccess": false },
+        "railwayLounge": null
+      },
+      "discountsAndOffers": {
+        "platforms": [],
+        "categories": [
+          { "category": "Travel", "partner": "Cleartrip", "offer": "15% off flights/hotels" }
+        ]
+      },
+      "charges": {
+        "interestRate": { "monthly": 3.50, "annual": 42.00 },
+        "cashAdvanceFee": { "percent": 2.5, "min": 500 },
+        "foreignTxnFee": 2.0,
+        "lateFee": 950,
+        "overLimitFee": 500,
+        "emiFee": { "processingPercent": 1.0, "minAmount": 199 },
+        "cardReplacementFee": 0,
+        "statementFee": 0
+      },
+      "features": {
+        "contactless": true,
+        "virtualCard": true,
+        "addOnCards": 4,
+        "insuranceCover": { "airAccident": 10000000, "lostCard": 300000, "purchaseProtection": 150000, "travelInsurance": 2500000 },
+        "concierge": true,
+        "golfAccess": { "enabled": true, "freeGames": 4 },
+        "zeroLiability": true,
+        "instantIssuance": false,
+        "emiConversion": true
+      },
+      "metadata": { "sourceUrl": "https://www.sc.com/in/", "scrapedAt": "2026-02-02T10:00:00Z", "confidence": 0.93, "manualReview": false }
+    },
+    {
+      "id": "sc-digismart",
+      "basicInfo": {
+        "name": "Standard Chartered DigiSmart Credit Card",
+        "issuer": "Standard Chartered",
+        "network": ["Visa"],
+        "cardType": "Entry Level",
+        "imageUrl": "",
+        "applyUrl": "https://www.sc.com/in/credit-cards/digismart-credit-card/",
+        "description": "Digital-first card with 5% cashback on online spends"
+      },
+      "fees": {
+        "joiningFee": 0,
+        "joiningFeeWaiver": null,
+        "annualFee": 49,
+        "annualFeeWaiver": "1 transaction/month",
+        "renewalFee": 49,
+        "addOnCardFee": 0,
+        "fuelSurchargeWaiver": { "enabled": true, "maxPerMonth": 100, "minTransaction": 750, "maxTransaction": 15000 }
+      },
+      "eligibility": {
+        "minSalary": 20000,
+        "minITR": 240000,
+        "minCibilScore": 680,
+        "employmentType": ["Salaried", "Self-Employed"],
+        "minAge": 21,
+        "maxAge": 60,
+        "existingRelationship": false
+      },
+      "rewards": {
+        "rewardRate": 1,
+        "rewardUnit": "cashback",
+        "pointValue": 1.0,
+        "acceleratedCategories": [
+          { "category": "Online Shopping", "rate": 5, "cap": 500 },
+          { "category": "Bill Payments", "rate": 5, "cap": 200 }
+        ],
+        "welcomeBonus": null,
+        "milestoneRewards": [],
+        "redemptionOptions": ["Statement credit"]
+      },
+      "loungeAccess": {
+        "domestic": null,
+        "international": null,
+        "railwayLounge": null
+      },
+      "discountsAndOffers": {
+        "platforms": [],
+        "categories": []
+      },
+      "charges": {
+        "interestRate": { "monthly": 3.50, "annual": 42.00 },
+        "cashAdvanceFee": { "percent": 2.5, "min": 300 },
+        "foreignTxnFee": 3.5,
+        "lateFee": 500,
+        "overLimitFee": 500,
+        "emiFee": { "processingPercent": 1.5, "minAmount": 199 },
+        "cardReplacementFee": 200,
+        "statementFee": 50
+      },
+      "features": {
+        "contactless": true,
+        "virtualCard": true,
+        "addOnCards": 1,
+        "insuranceCover": { "airAccident": null, "lostCard": 25000, "purchaseProtection": null },
+        "concierge": false,
+        "golfAccess": null,
+        "zeroLiability": true,
+        "instantIssuance": true,
+        "emiConversion": true
+      },
+      "metadata": { "sourceUrl": "https://www.sc.com/in/", "scrapedAt": "2026-02-02T10:00:00Z", "confidence": 0.93, "manualReview": false }
+    },
+    {
+      "id": "sc-manhattan",
+      "basicInfo": {
+        "name": "Standard Chartered Manhattan Credit Card",
+        "issuer": "Standard Chartered",
+        "network": ["Visa"],
+        "cardType": "Premium",
+        "imageUrl": "",
+        "applyUrl": "https://www.sc.com/in/credit-cards/manhattan-credit-card/",
+        "description": "5% cashback on groceries and bill payments"
+      },
+      "fees": {
+        "joiningFee": 999,
+        "joiningFeeWaiver": null,
+        "annualFee": 999,
+        "annualFeeWaiver": "Spend ₹1.2L/year",
+        "renewalFee": 999,
+        "addOnCardFee": 0,
+        "fuelSurchargeWaiver": { "enabled": true, "maxPerMonth": 200, "minTransaction": 750, "maxTransaction": 15000 }
+      },
+      "eligibility": {
+        "minSalary": 40000,
+        "minITR": 480000,
+        "minCibilScore": 720,
+        "employmentType": ["Salaried", "Self-Employed"],
+        "minAge": 21,
+        "maxAge": 60,
+        "existingRelationship": false
+      },
+      "rewards": {
+        "rewardRate": 1,
+        "rewardUnit": "cashback",
+        "pointValue": 1.0,
+        "acceleratedCategories": [
+          { "category": "Grocery", "rate": 5, "cap": 500 },
+          { "category": "Bill Payments", "rate": 5, "cap": 300 }
+        ],
+        "welcomeBonus": { "points": null, "value": 500, "condition": "On first spend" },
+        "milestoneRewards": [],
+        "redemptionOptions": ["Statement credit"]
+      },
+      "loungeAccess": {
+        "domestic": { "freeVisits": 4, "perYear": true, "program": "DreamFolks", "guestAccess": false },
+        "international": null,
+        "railwayLounge": null
+      },
+      "discountsAndOffers": {
+        "platforms": [],
+        "categories": [
+          { "category": "Movies", "partner": "BookMyShow", "offer": "25% off (up to ₹150)" }
+        ]
+      },
+      "charges": {
+        "interestRate": { "monthly": 3.50, "annual": 42.00 },
+        "cashAdvanceFee": { "percent": 2.5, "min": 400 },
+        "foreignTxnFee": 3.5,
+        "lateFee": 750,
+        "overLimitFee": 500,
+        "emiFee": { "processingPercent": 1.0, "minAmount": 199 },
+        "cardReplacementFee": 200,
+        "statementFee": 50
+      },
+      "features": {
+        "contactless": true,
+        "virtualCard": true,
+        "addOnCards": 2,
+        "insuranceCover": { "airAccident": 2000000, "lostCard": 100000, "purchaseProtection": 50000 },
+        "concierge": false,
+        "golfAccess": null,
+        "zeroLiability": true,
+        "instantIssuance": false,
+        "emiConversion": true
+      },
+      "metadata": { "sourceUrl": "https://www.sc.com/in/", "scrapedAt": "2026-02-02T10:00:00Z", "confidence": 0.93, "manualReview": false }
+    },
+    {
+      "id": "phonepe-icici",
+      "basicInfo": {
+        "name": "PhonePe ICICI Credit Card",
+        "issuer": "ICICI Bank",
+        "network": ["Visa"],
+        "cardType": "Entry Level",
+        "imageUrl": "",
+        "applyUrl": "https://www.phonepe.com/credit-card/",
+        "description": "2% cashback on PhonePe UPI payments, managed via PhonePe app"
+      },
+      "fees": {
+        "joiningFee": 0,
+        "joiningFeeWaiver": null,
+        "annualFee": 0,
+        "annualFeeWaiver": null,
+        "renewalFee": 0,
+        "addOnCardFee": 0,
+        "fuelSurchargeWaiver": { "enabled": true, "maxPerMonth": 100, "minTransaction": 400, "maxTransaction": 4000 }
+      },
+      "eligibility": {
+        "minSalary": 20000,
+        "minITR": 240000,
+        "minCibilScore": 680,
+        "employmentType": ["Salaried", "Self-Employed"],
+        "minAge": 21,
+        "maxAge": 60,
+        "existingRelationship": false
+      },
+      "rewards": {
+        "rewardRate": 1,
+        "rewardUnit": "cashback",
+        "pointValue": 1.0,
+        "acceleratedCategories": [
+          { "category": "PhonePe UPI", "rate": 2, "cap": 500 },
+          { "category": "Mobile Recharge", "rate": 2, "cap": 100 }
+        ],
+        "welcomeBonus": null,
+        "milestoneRewards": [],
+        "redemptionOptions": ["PhonePe wallet", "Statement credit"]
+      },
+      "loungeAccess": {
+        "domestic": null,
+        "international": null,
+        "railwayLounge": null
+      },
+      "discountsAndOffers": {
+        "platforms": [
+          { "name": "PhonePe", "discount": "2%", "cap": 500, "minSpend": null, "frequency": "per month" }
+        ],
+        "categories": []
+      },
+      "charges": {
+        "interestRate": { "monthly": 3.40, "annual": 40.80 },
+        "cashAdvanceFee": { "percent": 2.5, "min": 300 },
+        "foreignTxnFee": 3.5,
+        "lateFee": 500,
+        "overLimitFee": 500,
+        "emiFee": { "processingPercent": 1.0, "minAmount": 99 },
+        "cardReplacementFee": 100,
+        "statementFee": 0
+      },
+      "features": {
+        "contactless": true,
+        "virtualCard": true,
+        "addOnCards": 0,
+        "insuranceCover": { "airAccident": null, "lostCard": 25000, "purchaseProtection": null },
+        "concierge": false,
+        "golfAccess": null,
+        "zeroLiability": true,
+        "instantIssuance": true,
+        "emiConversion": true
+      },
+      "metadata": { "sourceUrl": "https://www.phonepe.com", "scrapedAt": "2026-02-02T10:00:00Z", "confidence": 0.92, "manualReview": false }
+    },
+    {
+      "id": "swiggy-axis",
+      "basicInfo": {
+        "name": "Axis Bank Swiggy Credit Card",
+        "issuer": "Axis Bank",
+        "network": ["Visa"],
+        "cardType": "Entry Level",
+        "imageUrl": "",
+        "applyUrl": "https://www.axisbank.com/retail/cards/credit-card/axis-bank-swiggy-credit-card",
+        "description": "5% cashback on Swiggy food orders and Instamart"
+      },
+      "fees": {
+        "joiningFee": 500,
+        "joiningFeeWaiver": null,
+        "annualFee": 500,
+        "annualFeeWaiver": "Spend ₹2L/year",
+        "renewalFee": 500,
+        "addOnCardFee": 0,
+        "fuelSurchargeWaiver": { "enabled": true, "maxPerMonth": 100, "minTransaction": 400, "maxTransaction": 4000 }
+      },
+      "eligibility": {
+        "minSalary": 20000,
+        "minITR": 240000,
+        "minCibilScore": 680,
+        "employmentType": ["Salaried", "Self-Employed"],
+        "minAge": 21,
+        "maxAge": 60,
+        "existingRelationship": false
+      },
+      "rewards": {
+        "rewardRate": 1,
+        "rewardUnit": "cashback",
+        "pointValue": 1.0,
+        "acceleratedCategories": [
+          { "category": "Swiggy Food", "rate": 5, "cap": 750 },
+          { "category": "Swiggy Instamart", "rate": 5, "cap": 250 },
+          { "category": "Online Shopping", "rate": 2, "cap": null }
+        ],
+        "welcomeBonus": { "points": null, "value": 500, "condition": "On first Swiggy order" },
+        "milestoneRewards": [],
+        "redemptionOptions": ["Statement credit"]
+      },
+      "loungeAccess": {
+        "domestic": { "freeVisits": 4, "perYear": true, "program": "DreamFolks", "guestAccess": false },
+        "international": null,
+        "railwayLounge": null
+      },
+      "discountsAndOffers": {
+        "platforms": [
+          { "name": "Swiggy", "discount": "5%", "cap": 750, "minSpend": null, "frequency": "per month" }
+        ],
+        "categories": []
+      },
+      "charges": {
+        "interestRate": { "monthly": 3.40, "annual": 40.80 },
+        "cashAdvanceFee": { "percent": 2.5, "min": 500 },
+        "foreignTxnFee": 3.5,
+        "lateFee": 500,
+        "overLimitFee": 500,
+        "emiFee": { "processingPercent": 1.0, "minAmount": 199 },
+        "cardReplacementFee": 200,
+        "statementFee": 50
+      },
+      "features": {
+        "contactless": true,
+        "virtualCard": true,
+        "addOnCards": 2,
+        "insuranceCover": { "airAccident": null, "lostCard": 50000, "purchaseProtection": null },
+        "concierge": false,
+        "golfAccess": null,
+        "zeroLiability": true,
+        "instantIssuance": true,
+        "emiConversion": true
+      },
+      "metadata": { "sourceUrl": "https://www.axisbank.com", "scrapedAt": "2026-02-02T10:00:00Z", "confidence": 0.92, "manualReview": false }
+    },
+    {
+      "id": "pnb-rupay-select",
+      "basicInfo": {
+        "name": "PNB RuPay Select Credit Card",
+        "issuer": "Punjab National Bank",
+        "network": ["RuPay"],
+        "cardType": "Premium",
+        "imageUrl": "",
+        "applyUrl": "https://www.pnbcard.in/credit-cards/rupay-select",
+        "description": "Premium RuPay card with UPI linking and lounge access"
+      },
+      "fees": {
+        "joiningFee": 1499,
+        "joiningFeeWaiver": null,
+        "annualFee": 1499,
+        "annualFeeWaiver": "Spend ₹2L/year",
+        "renewalFee": 1499,
+        "addOnCardFee": 0,
+        "fuelSurchargeWaiver": { "enabled": true, "maxPerMonth": 200, "minTransaction": 400, "maxTransaction": 4000 }
+      },
+      "eligibility": {
+        "minSalary": 40000,
+        "minITR": 480000,
+        "minCibilScore": 700,
+        "employmentType": ["Salaried", "Self-Employed"],
+        "minAge": 21,
+        "maxAge": 60,
+        "existingRelationship": false
+      },
+      "rewards": {
+        "rewardRate": 2,
+        "rewardUnit": "points",
+        "pointValue": 0.25,
+        "acceleratedCategories": [
+          { "category": "Online Shopping", "rate": 4, "cap": null },
+          { "category": "Dining", "rate": 3, "cap": null }
+        ],
+        "welcomeBonus": { "points": 5000, "value": 1250, "condition": "On first spend" },
+        "milestoneRewards": [
+          { "spend": 200000, "reward": "E-voucher ₹2,000", "period": "yearly" }
+        ],
+        "redemptionOptions": ["PNB Rewards", "Vouchers"]
+      },
+      "loungeAccess": {
+        "domestic": { "freeVisits": 4, "perYear": true, "program": "DreamFolks", "guestAccess": false },
+        "international": null,
+        "railwayLounge": { "enabled": true, "visits": 4 }
+      },
+      "discountsAndOffers": {
+        "platforms": [],
+        "categories": []
+      },
+      "charges": {
+        "interestRate": { "monthly": 3.35, "annual": 40.20 },
+        "cashAdvanceFee": { "percent": 2.5, "min": 500 },
+        "foreignTxnFee": 3.5,
+        "lateFee": 700,
+        "overLimitFee": 500,
+        "emiFee": { "processingPercent": 1.0, "minAmount": 199 },
+        "cardReplacementFee": 200,
+        "statementFee": 50
+      },
+      "features": {
+        "contactless": true,
+        "virtualCard": true,
+        "addOnCards": 2,
+        "insuranceCover": { "airAccident": 2500000, "lostCard": 100000, "purchaseProtection": 50000 },
+        "concierge": false,
+        "golfAccess": null,
+        "zeroLiability": true,
+        "instantIssuance": false,
+        "emiConversion": true
+      },
+      "metadata": { "sourceUrl": "https://www.pnbcard.in", "scrapedAt": "2026-02-02T10:00:00Z", "confidence": 0.88, "manualReview": true }
+    },
+    {
+      "id": "pnb-prime",
+      "basicInfo": {
+        "name": "PNB Prime Credit Card",
+        "issuer": "Punjab National Bank",
+        "network": ["Visa"],
+        "cardType": "Entry Level",
+        "imageUrl": "",
+        "applyUrl": "https://www.pnbcard.in/credit-cards/prime",
+        "description": "Basic card for everyday spending with fuel surcharge waiver"
+      },
+      "fees": {
+        "joiningFee": 499,
+        "joiningFeeWaiver": null,
+        "annualFee": 499,
+        "annualFeeWaiver": "Spend ₹75,000/year",
+        "renewalFee": 499,
+        "addOnCardFee": 0,
+        "fuelSurchargeWaiver": { "enabled": true, "maxPerMonth": 100, "minTransaction": 400, "maxTransaction": 4000 }
+      },
+      "eligibility": {
+        "minSalary": 20000,
+        "minITR": 240000,
+        "minCibilScore": 680,
+        "employmentType": ["Salaried", "Self-Employed"],
+        "minAge": 21,
+        "maxAge": 60,
+        "existingRelationship": false
+      },
+      "rewards": {
+        "rewardRate": 1,
+        "rewardUnit": "points",
+        "pointValue": 0.20,
+        "acceleratedCategories": [
+          { "category": "Online Shopping", "rate": 2, "cap": null }
+        ],
+        "welcomeBonus": { "points": 1000, "value": 200, "condition": "On first spend" },
+        "milestoneRewards": [],
+        "redemptionOptions": ["PNB Rewards", "Statement credit"]
+      },
+      "loungeAccess": {
+        "domestic": null,
+        "international": null,
+        "railwayLounge": null
+      },
+      "discountsAndOffers": {
+        "platforms": [],
+        "categories": []
+      },
+      "charges": {
+        "interestRate": { "monthly": 3.49, "annual": 41.88 },
+        "cashAdvanceFee": { "percent": 2.5, "min": 300 },
+        "foreignTxnFee": 3.5,
+        "lateFee": 500,
+        "overLimitFee": 500,
+        "emiFee": { "processingPercent": 1.5, "minAmount": 199 },
+        "cardReplacementFee": 200,
+        "statementFee": 50
+      },
+      "features": {
+        "contactless": true,
+        "virtualCard": true,
+        "addOnCards": 1,
+        "insuranceCover": { "airAccident": null, "lostCard": 25000, "purchaseProtection": null },
+        "concierge": false,
+        "golfAccess": null,
+        "zeroLiability": true,
+        "instantIssuance": false,
+        "emiConversion": true
+      },
+      "metadata": { "sourceUrl": "https://www.pnbcard.in", "scrapedAt": "2026-02-02T10:00:00Z", "confidence": 0.88, "manualReview": true }
     }
   ]
 }
