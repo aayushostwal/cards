@@ -10,9 +10,15 @@ Usage:
     python main.py export --output ../src/data/cards.json
 """
 
+import sys
+from pathlib import Path
+
+# Add python directory to path for proper module resolution
+PYTHON_DIR = Path(__file__).parent
+sys.path.insert(0, str(PYTHON_DIR))
+
 import json
 import argparse
-from pathlib import Path
 from datetime import datetime
 from typing import Optional
 

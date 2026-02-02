@@ -105,12 +105,22 @@ export function CardGrid({ cards, selectedCards, onToggleSelect }: CardGridProps
 
                 {/* Lounge Access */}
                 {(card.loungeAccess.domestic || card.loungeAccess.international) && (
-                  <div className="flex items-center gap-1 px-2 py-1 bg-purple-50 rounded-md">
-                    <Plane className="w-3 h-3 text-purple-600" />
-                    <span className="text-xs font-medium text-purple-700">
+                  <div className={`flex items-center gap-1 px-2 py-1 rounded-md ${
+                    (card.loungeAccess.domestic?.spendRequired || card.loungeAccess.international?.spendRequired)
+                      ? 'bg-amber-50' : 'bg-purple-50'
+                  }`}>
+                    <Plane className={`w-3 h-3 ${
+                      (card.loungeAccess.domestic?.spendRequired || card.loungeAccess.international?.spendRequired)
+                        ? 'text-amber-600' : 'text-purple-600'
+                    }`} />
+                    <span className={`text-xs font-medium ${
+                      (card.loungeAccess.domestic?.spendRequired || card.loungeAccess.international?.spendRequired)
+                        ? 'text-amber-700' : 'text-purple-700'
+                    }`}>
                       {card.loungeAccess.domestic ? `${card.loungeAccess.domestic.freeVisits}D` : ''}
                       {card.loungeAccess.domestic && card.loungeAccess.international ? '/' : ''}
                       {card.loungeAccess.international ? `${card.loungeAccess.international.freeVisits}I` : ''}
+                      {(card.loungeAccess.domestic?.spendRequired || card.loungeAccess.international?.spendRequired) && '*'}
                     </span>
                   </div>
                 )}

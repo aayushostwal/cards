@@ -12,7 +12,7 @@ from bs4 import BeautifulSoup
 import time
 import random
 
-from ..models import RawCardData
+from models import RawCardData
 
 
 @dataclass

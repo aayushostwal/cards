@@ -61,6 +61,12 @@ export interface CardRewards {
   redemptionOptions?: string[];
 }
 
+export interface LoungeSpendRequirement {
+  amount: number;           // Amount to spend (e.g., 10000)
+  period: 'monthly' | 'quarterly' | 'yearly';
+  visitsUnlocked: number;   // Number of visits unlocked per spend
+}
+
 export interface LoungeAccessTier {
   freeVisits: number;
   perQuarter?: boolean;
@@ -68,6 +74,7 @@ export interface LoungeAccessTier {
   program: string;
   guestAccess?: boolean;
   guestFee?: number;
+  spendRequired?: LoungeSpendRequirement;  // Spend to unlock lounge access
 }
 
 export interface CardLoungeAccess {

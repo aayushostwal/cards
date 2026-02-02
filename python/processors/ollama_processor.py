@@ -13,7 +13,7 @@ try:
 except ImportError:
     ollama = None
 
-from ..models import (
+from models import (
     CreditCard,
     RawCardData,
     BasicInfo,
@@ -29,6 +29,8 @@ from ..models import (
     CardType,
     EmploymentType,
     RewardUnit,
+)
+from models.card_schema import (
     FuelSurchargeWaiver,
     InterestRate,
     FeeWithMin,
@@ -400,7 +402,7 @@ class OllamaProcessor:
     
     def _parse_accelerated_categories(self, categories: list) -> list:
         """Parse accelerated reward categories."""
-        from ..models.card_schema import AcceleratedCategory
+        from models.card_schema import AcceleratedCategory
         
         result = []
         for cat in categories:
@@ -417,7 +419,7 @@ class OllamaProcessor:
         if not bonus:
             return None
         
-        from ..models.card_schema import WelcomeBonus
+        from models.card_schema import WelcomeBonus
         
         return WelcomeBonus(
             points=self._safe_int(bonus.get("points")),
@@ -430,7 +432,7 @@ class OllamaProcessor:
         if not tier:
             return None
         
-        from ..models.card_schema import LoungeAccessTier
+        from models.card_schema import LoungeAccessTier
         
         return LoungeAccessTier(
             free_visits=self._safe_int(tier.get("freeVisits"), 0),

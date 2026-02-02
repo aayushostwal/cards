@@ -6,7 +6,7 @@ Validates extracted data against the Pydantic schema and checks data quality.
 from typing import Optional
 from pydantic import ValidationError
 
-from ..models import CreditCard, CardsData
+from models import CreditCard, CardsData
 
 
 class ValidationResult:

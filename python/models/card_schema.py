@@ -124,6 +124,16 @@ class CardRewards(BaseModel):
         populate_by_name = True
 
 
+class LoungeSpendRequirement(BaseModel):
+    """Spend requirement to unlock lounge access."""
+    amount: int = Field(..., description="Amount to spend in INR")
+    period: Literal["monthly", "quarterly", "yearly"]
+    visitsUnlocked: int = Field(..., alias="visits_unlocked", description="Number of visits unlocked per spend")
+
+    class Config:
+        populate_by_name = True
+
+
 class LoungeAccessTier(BaseModel):
     freeVisits: int = Field(..., alias="free_visits")
     perQuarter: Optional[bool] = Field(None, alias="per_quarter")
@@ -131,6 +141,7 @@ class LoungeAccessTier(BaseModel):
     program: str
     guestAccess: Optional[bool] = Field(None, alias="guest_access")
     guestFee: Optional[int] = Field(None, alias="guest_fee")
+    spendRequired: Optional[LoungeSpendRequirement] = Field(None, alias="spend_required", description="Spend requirement to unlock lounge access")
 
     class Config:
         populate_by_name = True

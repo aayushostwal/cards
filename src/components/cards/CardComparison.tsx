@@ -1,7 +1,53 @@
 import type { CreditCard } from '../../types/card';
 import { formatCurrency, formatPercent } from '../../lib/utils';
-import { X, Plus, Check, AlertCircle } from 'lucide-react';
-import { useState } from 'react';
+import { X, Plus, Check, AlertCircle, Info } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
+
+// Feature descriptions for info tooltips
+const featureDescriptions: Record<string, string> = {
+  // Fees
+  'Joining Fee': 'One-time fee charged when you first get the card. Some cards waive this based on spending.',
+  'Joining Waiver': 'Conditions under which the joining fee can be waived, usually based on initial spending.',
+  'Annual Fee': 'Yearly fee charged to maintain the card. Premium cards typically have higher fees.',
+  'Annual Waiver': 'Conditions to waive the annual fee, typically based on yearly spending thresholds.',
+  'Fuel Surcharge': 'Maximum monthly savings on fuel surcharge waiver. Banks waive the 1-2.5% surcharge at fuel stations.',
+  
+  // Rewards
+  'Base Rate': 'Standard reward rate on all purchases. Higher is better for regular spending.',
+  'Type': 'The reward currency - Points (redeemable for products/travel), Cashback (direct credit), or Miles (air miles).',
+  'Point Value': 'Monetary value of each reward point when redeemed. Actual value may vary by redemption method.',
+  'Welcome Bonus': 'One-time bonus rewards given when you meet initial spending requirements after card approval.',
+  'Best Category': 'Highest reward rate available on any spending category for this card.',
+  
+  // Lounge
+  'Domestic': 'Number of domestic airport lounge visits per year included with the card.',
+  'Dom. Spend Req': 'Minimum spend required to unlock domestic lounge visits. "Free" means complimentary without any spend requirement.',
+  'International': 'Number of international airport lounge visits per year included with the card.',
+  'Intl. Spend Req': 'Minimum spend required to unlock international lounge visits. "Free" means complimentary without any spend requirement.',
+  'Program': 'Lounge access network - Priority Pass, Dreamfolks, or bank-specific programs.',
+  'Guest': 'Whether you can bring guests to the lounge (may have additional charges).',
+  
+  // Charges
+  'APR': 'Annual Percentage Rate - interest charged on unpaid balances. Lower is better. Avoid carrying balances.',
+  'Foreign Txn': 'Fee charged on international transactions or purchases in foreign currency. Lower is better for travelers.',
+  'Late Fee': 'Penalty charged if you miss the payment due date. Always pay at least minimum due on time.',
+  'Cash Advance': 'Fee for withdrawing cash using your credit card. Avoid cash advances - they also have higher interest.',
+  'EMI Fee': 'Processing fee charged when converting purchases to EMI. Usually 1-2% of the transaction amount.',
+  
+  // Eligibility
+  'Min Salary': 'Minimum monthly income required for salaried individuals to apply for this card.',
+  'Min ITR': 'Minimum annual income tax return required for self-employed individuals.',
+  'Min CIBIL': 'Minimum credit score required. 750+ is considered good. Higher scores get better approval odds.',
+  'Age': 'Eligible age range for primary cardholders.',
+  
+  // Features
+  'Contactless': 'Tap-to-pay feature for quick transactions under ₹5,000 without entering PIN.',
+  'Virtual Card': 'Instant digital card for online shopping before physical card arrives.',
+  'Instant Issue': 'Get a working card number instantly after approval, without waiting for physical delivery.',
+  'Concierge': '24/7 personal assistance for travel bookings, restaurant reservations, and lifestyle services.',
+  'Insurance': 'Complimentary air accident insurance cover provided with the card.',
+};
 
 interface CardComparisonProps {
   cards: CreditCard[];
@@ -12,9 +58,56 @@ interface CardComparisonProps {
 
 type ComparisonCategory = 'fees' | 'rewards' | 'lounge' | 'charges' | 'eligibility' | 'features';
 
+// Tooltip component that renders via portal
+function InfoTooltip({ 
+  label, 
+  description, 
+  buttonRef, 
+  onClose 
+}: { 
+  label: string; 
+  description: string; 
+  buttonRef: React.RefObject<HTMLButtonElement | null>; 
+  onClose: () => void;
+}) {
+  const [position, setPosition] = useState({ top: 0, left: 0 });
+  
+  useEffect(() => {
+    if (buttonRef.current) {
+      const rect = buttonRef.current.getBoundingClientRect();
+      setPosition({
+        top: rect.top + rect.height / 2,
+        left: rect.right + 8,
+      });
+    }
+  }, [buttonRef]);
+
+  return createPortal(
+    <div 
+      className="fixed z-[9999] w-64 p-3 bg-slate-800 text-white text-xs rounded-lg shadow-2xl leading-relaxed"
+      style={{ 
+        top: position.top, 
+        left: position.left,
+        transform: 'translateY(-50%)',
+      }}
+      onMouseEnter={(e) => e.stopPropagation()}
+      onMouseLeave={onClose}
+    >
+      <div className="font-semibold mb-1 text-sm">{label}</div>
+      <div className="text-slate-200">{description}</div>
+      <div 
+        className="absolute top-1/2 -translate-y-1/2 -left-1.5 w-3 h-3 bg-slate-800 rotate-45"
+      />
+    </div>,
+    document.body
+  );
+}
+
 export function CardComparison({ cards, allCards, onRemoveCard, onAddCard }: CardComparisonProps) {
   const [activeCategory, setActiveCategory] = useState<ComparisonCategory>('fees');
   const [showAddCard, setShowAddCard] = useState(false);
+  const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
+  const tooltipButtonRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 
   const categories: { id: ComparisonCategory; label: string }[] = [
     { id: 'fees', label: 'Fees' },
@@ -45,7 +138,34 @@ export function CardComparison({ cards, allCards, onRemoveCard, onAddCard }: Car
     );
   }
 
-  const renderComparisonRow = (label: string, getValue: (card: CreditCard) => React.ReactNode, highlight?: 'lower' | 'higher') => {
+  // Color palette for card columns
+  const cardColors = [
+    { bg: 'bg-blue-50', header: 'bg-blue-100', border: 'border-blue-200', text: 'text-blue-900' },
+    { bg: 'bg-purple-50', header: 'bg-purple-100', border: 'border-purple-200', text: 'text-purple-900' },
+    { bg: 'bg-amber-50', header: 'bg-amber-100', border: 'border-amber-200', text: 'text-amber-900' },
+    { bg: 'bg-emerald-50', header: 'bg-emerald-100', border: 'border-emerald-200', text: 'text-emerald-900' },
+  ];
+
+  const renderTableHeader = () => (
+    <thead className="sticky top-0 z-10">
+      <tr>
+        <th className="py-3 sm:py-4 px-3 sm:px-4 text-left text-xs sm:text-sm font-semibold text-slate-700 bg-slate-100 sticky left-0 z-20 min-w-[120px] sm:min-w-[150px] border-b-2 border-slate-200">
+          Feature
+        </th>
+        {cards.map((card, idx) => (
+          <th 
+            key={card.id}
+            className={`py-3 sm:py-4 px-3 sm:px-4 text-center min-w-[140px] sm:min-w-[180px] border-b-2 ${cardColors[idx % cardColors.length].header} ${cardColors[idx % cardColors.length].border} ${cardColors[idx % cardColors.length].text}`}
+          >
+            <div className="font-semibold text-xs sm:text-sm leading-tight">{card.basicInfo.name}</div>
+            <div className="text-[10px] sm:text-xs opacity-75 mt-0.5">{card.basicInfo.issuer}</div>
+          </th>
+        ))}
+      </tr>
+    </thead>
+  );
+
+  const renderComparisonRow = (label: string, getValue: (card: CreditCard) => React.ReactNode, highlight?: 'lower' | 'higher', isLast?: boolean) => {
     const values = cards.map(card => {
       const value = getValue(card);
       return { card, value };
@@ -57,6 +177,12 @@ export function CardComparison({ cards, allCards, onRemoveCard, onAddCard }: Car
         if (typeof v.value === 'number') return v.value;
         if (typeof v.value === 'string' && v.value.includes('₹')) {
           return parseFloat(v.value.replace(/[₹,]/g, ''));
+        }
+        if (typeof v.value === 'string' && v.value.includes('%')) {
+          return parseFloat(v.value.replace('%', ''));
+        }
+        if (typeof v.value === 'string' && v.value.includes('/yr')) {
+          return parseFloat(v.value.replace('/yr', ''));
         }
         return null;
       });
@@ -70,21 +196,53 @@ export function CardComparison({ cards, allCards, onRemoveCard, onAddCard }: Car
       }
     }
 
+    const description = featureDescriptions[label];
+    
     return (
-      <tr className="border-b border-slate-100">
-        <td className="py-2.5 sm:py-3 px-3 sm:px-4 text-xs sm:text-sm font-medium text-slate-600 bg-slate-50 sticky left-0 min-w-[120px] sm:min-w-[150px]">
-          {label}
+      <tr className={`${!isLast ? 'border-b border-slate-100' : ''} hover:bg-slate-50/50 transition-colors`}>
+        <td className="py-3 sm:py-4 px-3 sm:px-4 text-xs sm:text-sm font-medium text-slate-700 bg-white sticky left-0 z-[5] min-w-[120px] sm:min-w-[150px] border-r border-slate-200 shadow-[2px_0_4px_-2px_rgba(0,0,0,0.1)]">
+          <div className="flex items-center gap-1.5">
+            <span>{label}</span>
+            {description && (
+              <>
+                <button
+                  ref={(el) => { tooltipButtonRefs.current[label] = el; }}
+                  onClick={() => setActiveTooltip(activeTooltip === label ? null : label)}
+                  onMouseEnter={() => setActiveTooltip(label)}
+                  onMouseLeave={() => setActiveTooltip(null)}
+                  className="p-0.5 text-slate-400 hover:text-blue-500 hover:bg-blue-50 rounded-full transition-colors"
+                  aria-label={`Info about ${label}`}
+                >
+                  <Info className="w-3.5 h-3.5" />
+                </button>
+                {activeTooltip === label && (
+                  <InfoTooltip
+                    label={label}
+                    description={description}
+                    buttonRef={{ current: tooltipButtonRefs.current[label] }}
+                    onClose={() => setActiveTooltip(null)}
+                  />
+                )}
+              </>
+            )}
+          </div>
         </td>
-        {values.map((v, idx) => (
-          <td 
-            key={v.card.id} 
-            className={`py-2.5 sm:py-3 px-3 sm:px-4 text-xs sm:text-sm text-center min-w-[120px] sm:min-w-[150px] ${
-              bestIndex === idx ? 'bg-green-50 text-green-700 font-semibold' : 'text-slate-900'
-            }`}
-          >
-            {v.value}
-          </td>
-        ))}
+        {values.map((v, idx) => {
+          const colorScheme = cardColors[idx % cardColors.length];
+          const isBest = bestIndex === idx;
+          return (
+            <td 
+              key={v.card.id} 
+              className={`py-3 sm:py-4 px-3 sm:px-4 text-xs sm:text-sm text-center min-w-[140px] sm:min-w-[180px] ${
+                isBest 
+                  ? 'bg-green-100 text-green-800 font-semibold' 
+                  : `${colorScheme.bg} ${colorScheme.text}`
+              } ${idx < values.length - 1 ? 'border-r border-slate-200/60' : ''}`}
+            >
+              {v.value}
+            </td>
+          );
+        })}
       </tr>
     );
   };
@@ -140,8 +298,9 @@ export function CardComparison({ cards, allCards, onRemoveCard, onAddCard }: Car
         </div>
 
         {/* Scrollable Table */}
-        <div className="overflow-x-auto">
-          <table className="w-full">
+        <div className="overflow-x-auto max-h-[60vh]">
+          <table className="w-full border-collapse">
+            {renderTableHeader()}
             <tbody>
               {activeCategory === 'fees' && (
                 <>
@@ -158,7 +317,8 @@ export function CardComparison({ cards, allCards, onRemoveCard, onAddCard }: Car
                   {renderComparisonRow('Fuel Surcharge', c => 
                     c.fees.fuelSurchargeWaiver.enabled 
                       ? `₹${c.fees.fuelSurchargeWaiver.maxPerMonth || 0}/mo`
-                      : 'No'
+                      : 'No',
+                    undefined, true
                   )}
                 </>
               )}
@@ -179,7 +339,7 @@ export function CardComparison({ cards, allCards, onRemoveCard, onAddCard }: Car
                     const maxRate = Math.max(...c.rewards.acceleratedCategories.map(cat => cat.rate), c.rewards.rewardRate);
                     const bestCat = c.rewards.acceleratedCategories.find(cat => cat.rate === maxRate);
                     return bestCat ? `${bestCat.rate}%` : `${c.rewards.rewardRate}%`;
-                  }, 'higher')}
+                  }, 'higher', true)}
                 </>
               )}
 
@@ -191,17 +351,38 @@ export function CardComparison({ cards, allCards, onRemoveCard, onAddCard }: Car
                       : <span className="text-red-500">No</span>,
                     'higher'
                   )}
+                  {renderComparisonRow('Dom. Spend Req', c => {
+                    if (!c.loungeAccess.domestic) return <span className="text-slate-400">N/A</span>;
+                    const sr = c.loungeAccess.domestic.spendRequired;
+                    if (!sr) return <span className="text-green-600 font-medium">Free</span>;
+                    return (
+                      <span className="text-amber-700">
+                        ₹{(sr.amount/1000).toFixed(0)}k/{sr.period.slice(0,3)}
+                      </span>
+                    );
+                  })}
                   {renderComparisonRow('International', c => 
                     c.loungeAccess.international 
                       ? `${c.loungeAccess.international.freeVisits}/yr`
                       : <span className="text-red-500">No</span>,
                     'higher'
                   )}
+                  {renderComparisonRow('Intl. Spend Req', c => {
+                    if (!c.loungeAccess.international) return <span className="text-slate-400">N/A</span>;
+                    const sr = c.loungeAccess.international.spendRequired;
+                    if (!sr) return <span className="text-green-600 font-medium">Free</span>;
+                    return (
+                      <span className="text-amber-700">
+                        ₹{(sr.amount/1000).toFixed(0)}k/{sr.period.slice(0,3)}
+                      </span>
+                    );
+                  })}
                   {renderComparisonRow('Program', c => c.loungeAccess.domestic?.program || c.loungeAccess.international?.program || 'N/A')}
                   {renderComparisonRow('Guest', c => 
                     c.loungeAccess.domestic?.guestAccess || c.loungeAccess.international?.guestAccess
                       ? <span className="text-green-600">Yes</span>
-                      : 'No'
+                      : 'No',
+                    undefined, true
                   )}
                 </>
               )}
@@ -212,7 +393,7 @@ export function CardComparison({ cards, allCards, onRemoveCard, onAddCard }: Car
                   {renderComparisonRow('Foreign Txn', c => formatPercent(c.charges.foreignTxnFee), 'lower')}
                   {renderComparisonRow('Late Fee', c => formatCurrency(c.charges.lateFee), 'lower')}
                   {renderComparisonRow('Cash Advance', c => `${c.charges.cashAdvanceFee.percent}%`)}
-                  {renderComparisonRow('EMI Fee', c => `${c.charges.emiFee.processingPercent}%`)}
+                  {renderComparisonRow('EMI Fee', c => `${c.charges.emiFee.processingPercent}%`, undefined, true)}
                 </>
               )}
 
@@ -231,7 +412,7 @@ export function CardComparison({ cards, allCards, onRemoveCard, onAddCard }: Car
                     'lower'
                   )}
                   {renderComparisonRow('Min CIBIL', c => c.eligibility.minCibilScore || 'N/A', 'lower')}
-                  {renderComparisonRow('Age', c => `${c.eligibility.minAge}-${c.eligibility.maxAge}`)}
+                  {renderComparisonRow('Age', c => `${c.eligibility.minAge}-${c.eligibility.maxAge}`, undefined, true)}
                 </>
               )}
 
@@ -252,12 +433,28 @@ export function CardComparison({ cards, allCards, onRemoveCard, onAddCard }: Car
                   {renderComparisonRow('Insurance', c => 
                     c.features.insuranceCover.airAccident 
                       ? `₹${Math.round(c.features.insuranceCover.airAccident/100000)}L`
-                      : 'None'
+                      : 'None',
+                    undefined, true
                   )}
                 </>
               )}
             </tbody>
           </table>
+        </div>
+
+        {/* Legend */}
+        <div className="px-4 py-3 bg-slate-50 border-t border-slate-200 flex flex-wrap items-center gap-4 text-xs text-slate-600">
+          <div className="flex items-center gap-1.5">
+            <div className="w-3 h-3 rounded bg-green-100 border border-green-300"></div>
+            <span>Best value</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <div className="w-3 h-3 rounded bg-blue-50 border border-blue-200"></div>
+            <div className="w-3 h-3 rounded bg-purple-50 border border-purple-200"></div>
+            <div className="w-3 h-3 rounded bg-amber-50 border border-amber-200"></div>
+            <div className="w-3 h-3 rounded bg-emerald-50 border border-emerald-200"></div>
+            <span>Card columns</span>
+          </div>
         </div>
       </div>
 

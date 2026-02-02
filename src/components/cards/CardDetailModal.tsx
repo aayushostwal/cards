@@ -203,18 +203,36 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
                     <div className="bg-purple-50 rounded-xl p-4">
                       <p className="text-xs text-purple-600 mb-1">Domestic Lounges</p>
                       <p className="text-xl font-bold text-purple-700">
-                        {card.loungeAccess.domestic.freeVisits} <span className="text-sm font-normal">free visits/year</span>
+                        {card.loungeAccess.domestic.freeVisits} <span className="text-sm font-normal">visits/year</span>
                       </p>
                       <p className="text-xs text-purple-600 mt-1">{card.loungeAccess.domestic.program}</p>
+                      {card.loungeAccess.domestic.spendRequired ? (
+                        <div className="mt-2 pt-2 border-t border-purple-200">
+                          <p className="text-xs font-medium text-amber-700 bg-amber-50 px-2 py-1 rounded inline-block">
+                            Spend {formatCurrency(card.loungeAccess.domestic.spendRequired.amount)}/{card.loungeAccess.domestic.spendRequired.period} → {card.loungeAccess.domestic.spendRequired.visitsUnlocked} visit{card.loungeAccess.domestic.spendRequired.visitsUnlocked > 1 ? 's' : ''}
+                          </p>
+                        </div>
+                      ) : (
+                        <p className="text-xs text-green-600 mt-2 font-medium">✓ Complimentary (no spend required)</p>
+                      )}
                     </div>
                   )}
                   {card.loungeAccess.international && (
                     <div className="bg-purple-50 rounded-xl p-4">
                       <p className="text-xs text-purple-600 mb-1">International Lounges</p>
                       <p className="text-xl font-bold text-purple-700">
-                        {card.loungeAccess.international.freeVisits} <span className="text-sm font-normal">free visits/year</span>
+                        {card.loungeAccess.international.freeVisits} <span className="text-sm font-normal">visits/year</span>
                       </p>
                       <p className="text-xs text-purple-600 mt-1">{card.loungeAccess.international.program}</p>
+                      {card.loungeAccess.international.spendRequired ? (
+                        <div className="mt-2 pt-2 border-t border-purple-200">
+                          <p className="text-xs font-medium text-amber-700 bg-amber-50 px-2 py-1 rounded inline-block">
+                            Spend {formatCurrency(card.loungeAccess.international.spendRequired.amount)}/{card.loungeAccess.international.spendRequired.period} → {card.loungeAccess.international.spendRequired.visitsUnlocked} visit{card.loungeAccess.international.spendRequired.visitsUnlocked > 1 ? 's' : ''}
+                          </p>
+                        </div>
+                      ) : (
+                        <p className="text-xs text-green-600 mt-2 font-medium">✓ Complimentary (no spend required)</p>
+                      )}
                     </div>
                   )}
                 </div>

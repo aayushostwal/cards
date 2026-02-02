@@ -8,7 +8,7 @@ from urllib.parse import urljoin
 from datetime import datetime
 
 from .base import BaseScraper, ScraperConfig
-from ..models import RawCardData
+from models import RawCardData
 
 
 class HDFCScraper(BaseScraper):
