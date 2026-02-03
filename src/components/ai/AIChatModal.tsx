@@ -14,10 +14,36 @@ interface AIChatModalProps {
 }
 
 const QUICK_PROMPTS = [
-  { text: "Best cashback card with no annual fee?", icon: "💰" },
-  { text: "Card for Amazon & Swiggy shopping", icon: "🛒" },
-  { text: "Good lounge access under ₹2500 fee", icon: "✈️" },
-  { text: "Best travel rewards credit card", icon: "🌍" },
+  { 
+    text: "Best cashback card with zero annual fee for ₹50k salary", 
+    icon: "💰",
+    label: "No Fee Cashback"
+  },
+  { 
+    text: "I spend ₹15k/month on Amazon, Swiggy & Zomato. Which card gives best rewards?", 
+    icon: "🛒",
+    label: "Online Shopping"
+  },
+  { 
+    text: "Need airport lounge access for domestic travel, budget ₹2500 annual fee", 
+    icon: "✈️",
+    label: "Lounge Access"
+  },
+  { 
+    text: "Compare top 3 premium travel cards with international lounge access", 
+    icon: "🌍",
+    label: "Travel Cards"
+  },
+  { 
+    text: "I travel abroad twice a year. Which card has lowest forex markup?", 
+    icon: "💱",
+    label: "Low Forex Fee"
+  },
+  { 
+    text: "Best card for fuel purchases with surcharge waiver?", 
+    icon: "⛽",
+    label: "Fuel Benefits"
+  },
 ];
 
 // Credit card quotes and tips to show while loading
