@@ -1,11 +1,22 @@
 import Groq from 'groq-sdk';
 import type { CreditCard } from '../types/card';
 
-// Initialize Groq client - API key should be set in environment
+// API Provider configuration
+type APIProvider = 'groq' | 'ollama';
+
+// Get the active provider from environment (default to groq)
+const ACTIVE_PROVIDER: APIProvider = (import.meta.env.VITE_AI_PROVIDER as APIProvider) || 'groq';
+
+// Groq configuration
 const groq = new Groq({
   apiKey: import.meta.env.VITE_GROQ_API_KEY || '',
-  dangerouslyAllowBrowser: true, // For client-side usage
+  dangerouslyAllowBrowser: true,
 });
+
+// Ollama configuration (via ngrok)
+const OLLAMA_ENDPOINT = import.meta.env.VITE_OLLAMA_ENDPOINT || '';
+const OLLAMA_API_TOKEN = import.meta.env.VITE_OLLAMA_API_TOKEN || '';
+const OLLAMA_MODEL = import.meta.env.VITE_OLLAMA_MODEL || 'llama3.2';
 
 export interface ChatMessage {
   role: 'user' | 'assistant' | 'system';
@@ -72,6 +83,70 @@ RESPONSE FORMAT:
 Respond in a friendly, professional tone. Use ₹ symbol for Indian Rupees.`;
 }
 
+// Ollama API call (OpenAI-compatible format)
+async function getOllamaCompletion(
+  messages: ChatMessage[],
+  systemPrompt: string
+): Promise<string> {
+  if (!OLLAMA_ENDPOINT) {
+    throw new Error('Ollama endpoint not configured. Set VITE_OLLAMA_ENDPOINT in your .env file.');
+  }
+
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+  };
+
+  // Add authorization header if token is provided
+  if (OLLAMA_API_TOKEN) {
+    headers["Content-Type"] = "application/json";
+    headers['Authorization'] = `Bearer ${OLLAMA_API_TOKEN}`;
+  }
+
+  const response = await fetch(`${OLLAMA_ENDPOINT}/v1/chat/completions`, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({
+      model: OLLAMA_MODEL,
+      messages: [
+        { role: 'system', content: systemPrompt },
+        ...messages.map(m => ({ role: m.role, content: m.content })),
+      ],
+      stream: false,
+      options: {
+        temperature: 0.7,
+        num_predict: 1024,
+      },
+    }),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Ollama API error: ${response.status} - ${errorText}`);
+  }
+
+  const data = await response.json();
+  return data.message?.content || 'Sorry, I could not generate a response.';
+}
+
+// Groq API call
+async function getGroqCompletion(
+  messages: ChatMessage[],
+  systemPrompt: string
+): Promise<string> {
+  const completion = await groq.chat.completions.create({
+    model: 'llama-3.3-70b-versatile',
+    messages: [
+      { role: 'system', content: systemPrompt },
+      ...messages.map(m => ({ role: m.role, content: m.content })),
+    ],
+    temperature: 0.7,
+    max_tokens: 1024,
+  });
+
+  return completion.choices[0]?.message?.content || 'Sorry, I could not generate a response.';
+}
+
+// Main function - routes to the active provider
 export async function getChatCompletion(
   messages: ChatMessage[],
   cards: CreditCard[]
@@ -79,19 +154,18 @@ export async function getChatCompletion(
   try {
     const systemPrompt = buildSystemPrompt(cards);
     
-    const completion = await groq.chat.completions.create({
-      model: 'llama-3.3-70b-versatile',
-      messages: [
-        { role: 'system', content: systemPrompt },
-        ...messages.map(m => ({ role: m.role, content: m.content })),
-      ],
-      temperature: 0.7,
-      max_tokens: 1024,
-    });
-
-    return completion.choices[0]?.message?.content || 'Sorry, I could not generate a response.';
+    if (ACTIVE_PROVIDER === 'ollama') {
+      return await getOllamaCompletion(messages, systemPrompt);
+    } else {
+      return await getGroqCompletion(messages, systemPrompt);
+    }
   } catch (error) {
-    console.error('Groq API error:', error);
+    console.error(`${ACTIVE_PROVIDER} API error:`, error);
     throw error;
   }
+}
+
+// Export the active provider for debugging/display
+export function getActiveProvider(): APIProvider {
+  return ACTIVE_PROVIDER;
 }
