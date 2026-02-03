@@ -4,7 +4,7 @@ import remarkGfm from 'remark-gfm';
 import type { CreditCard } from '../../types/card';
 import { getChatCompletion } from '../../lib/groq';
 import type { ChatMessage } from '../../lib/groq';
-import { Send, Bot, User, X, Maximize2, Minimize2, Trash2 } from 'lucide-react';
+import { Send, Bot, User, X, Maximize2, Minimize2, Trash2, Sparkles } from 'lucide-react';
 
 interface AIChatModalProps {
   cards: CreditCard[];
@@ -20,17 +20,42 @@ const QUICK_PROMPTS = [
   { text: "Best travel rewards credit card", icon: "🌍" },
 ];
 
+// Credit card quotes and tips to show while loading
+const LOADING_QUOTES = [
+  { text: "A good credit score is your financial superpower.", icon: "💪" },
+  { text: "The best credit card is the one that matches your spending habits.", icon: "🎯" },
+  { text: "Rewards are great, but never spend more just to earn points.", icon: "💡" },
+  { text: "Always pay your full balance to avoid interest charges.", icon: "✨" },
+  { text: "Annual fees can be worth it if the rewards outweigh the cost.", icon: "⚖️" },
+  { text: "Lounge access alone can justify a premium card for frequent travelers.", icon: "✈️" },
+  { text: "Welcome bonuses are free money — if you were planning to spend anyway.", icon: "🎁" },
+  { text: "Track your spending categories to maximize cashback.", icon: "📊" },
+  { text: "One reward point isn't always equal to one rupee.", icon: "🔢" },
+  { text: "Compare the effective reward rate, not just the headline rate.", icon: "🧮" },
+  { text: "Fuel surcharge waiver can save you thousands yearly.", icon: "⛽" },
+  { text: "Zero liability protection keeps your money safe from fraud.", icon: "🛡️" },
+  { text: "Some cards offer complimentary insurance worth lakhs.", icon: "🏥" },
+  { text: "Read the fine print — fee waivers often have spending conditions.", icon: "📖" },
+  { text: "Multiple cards can help you maximize category-specific rewards.", icon: "🃏" },
+  { text: "Your credit utilization should stay below 30%.", icon: "📉" },
+  { text: "Never miss a payment — it affects your credit score for years.", icon: "📅" },
+  { text: "International cards with low forex fees save money abroad.", icon: "🌍" },
+  { text: "Milestone rewards can add significant value to your card.", icon: "🏆" },
+  { text: "Golf, movies, dining — premium cards come with hidden perks.", icon: "🎬" },
+];
+
 export function AIChatModal({ cards, isOpen, onClose, initialMessage }: AIChatModalProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const hasProcessedInitialMessage = useRef(false);
 
-  const hasApiKey = !!import.meta.env.VITE_GROQ_API_KEY;
+  const hasApiKey = !!import.meta.env.VITE_GROQ_API_KEY || !!import.meta.env.VITE_OLLAMA_ENDPOINT;
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -62,13 +87,34 @@ export function AIChatModal({ cards, isOpen, onClose, initialMessage }: AIChatMo
     }
   }, [isOpen]);
 
+  // Shuffle quotes while loading
+  useEffect(() => {
+    if (!isLoading) return;
+
+    // Set initial random quote
+    setCurrentQuoteIndex(Math.floor(Math.random() * LOADING_QUOTES.length));
+
+    const interval = setInterval(() => {
+      setCurrentQuoteIndex(prev => {
+        let next = Math.floor(Math.random() * LOADING_QUOTES.length);
+        // Ensure we don't show the same quote twice in a row
+        while (next === prev && LOADING_QUOTES.length > 1) {
+          next = Math.floor(Math.random() * LOADING_QUOTES.length);
+        }
+        return next;
+      });
+    }, 2500); // Change quote every 2.5 seconds
+
+    return () => clearInterval(interval);
+  }, [isLoading]);
+
   const handleSubmit = async (e?: React.FormEvent, promptOverride?: string) => {
     e?.preventDefault();
     const messageText = promptOverride || input.trim();
     if (!messageText || isLoading) return;
 
     if (!hasApiKey) {
-      setError('Please add VITE_GROQ_API_KEY to .env file');
+      setError('Please add VITE_GROQ_API_KEY or VITE_OLLAMA_ENDPOINT to .env file');
       return;
     }
 
@@ -103,6 +149,8 @@ export function AIChatModal({ cards, isOpen, onClose, initialMessage }: AIChatMo
   };
 
   if (!isOpen) return null;
+
+  const currentQuote = LOADING_QUOTES[currentQuoteIndex];
 
   return (
     <div 
@@ -230,19 +278,42 @@ export function AIChatModal({ cards, isOpen, onClose, initialMessage }: AIChatMo
                   </div>
                 ))}
                 
+                {/* Loading state with quotes */}
                 {isLoading && (
                   <div className="flex gap-2 sm:gap-3">
                     <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shrink-0">
                       <Bot className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                     </div>
-                    <div className="bg-[hsl(var(--card))] border border-[hsl(var(--border))] rounded-2xl px-3 sm:px-4 py-2 sm:py-3">
-                      <div className="flex items-center gap-2">
-                        <div className="flex gap-1">
-                          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-blue-500 rounded-full typing-dot" />
-                          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-blue-500 rounded-full typing-dot" />
-                          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-blue-500 rounded-full typing-dot" />
+                    <div className="flex-1">
+                      <div className="bg-[hsl(var(--card))] border border-[hsl(var(--border))] rounded-2xl px-3 sm:px-4 py-3 sm:py-4">
+                        {/* Typing indicator */}
+                        <div className="flex items-center gap-2 mb-3">
+                          <div className="flex gap-1">
+                            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-blue-500 rounded-full typing-dot" />
+                            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-blue-500 rounded-full typing-dot" />
+                            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-blue-500 rounded-full typing-dot" />
+                          </div>
+                          <span className="text-xs text-[hsl(var(--muted-foreground))]">Thinking...</span>
                         </div>
-                        <span className="text-xs text-[hsl(var(--muted-foreground))]">Thinking...</span>
+                        
+                        {/* Quote card */}
+                        <div 
+                          key={currentQuoteIndex}
+                          className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-xl p-3 animate-fade-in"
+                        >
+                          <div className="flex items-start gap-2">
+                            <span className="text-lg shrink-0">{currentQuote.icon}</span>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs sm:text-sm text-[hsl(var(--muted-foreground))] italic leading-relaxed">
+                                "{currentQuote.text}"
+                              </p>
+                              <div className="flex items-center gap-1 mt-2">
+                                <Sparkles className="w-3 h-3 text-blue-400" />
+                                <span className="text-[10px] text-blue-400 font-medium">Did you know?</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
