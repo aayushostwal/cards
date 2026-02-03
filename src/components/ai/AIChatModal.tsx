@@ -252,20 +252,24 @@ export function AIChatModal({ cards, isOpen, onClose, initialMessage }: AIChatMo
                   </div>
                 )}
                 
-                <div className="w-full max-w-md px-2">
-                  <p className="text-xs text-[hsl(var(--muted-foreground))] mb-2 font-medium">Quick questions:</p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div className="w-full max-w-lg px-2">
+                  <p className="text-xs text-[hsl(var(--muted-foreground))] mb-3 font-medium">Try asking about:</p>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                     {QUICK_PROMPTS.map((prompt, i) => (
                       <button
                         key={i}
                         onClick={() => handleSubmit(undefined, prompt.text)}
-                        className="flex items-center gap-2 px-3 py-2.5 bg-[hsl(var(--card))] hover:bg-[hsl(var(--background-tertiary))] border border-[hsl(var(--border))] hover:border-[hsl(var(--border-light))] text-[hsl(var(--muted-foreground))] hover:text-white rounded-xl transition-all text-xs text-left"
+                        className="group flex flex-col items-center gap-1.5 p-3 bg-[hsl(var(--card))] hover:bg-[hsl(var(--background-tertiary))] border border-[hsl(var(--border))] hover:border-blue-500/50 rounded-xl transition-all text-center touch-manipulation"
+                        title={prompt.text}
                       >
-                        <span className="text-base">{prompt.icon}</span>
-                        <span className="flex-1 line-clamp-1">{prompt.text}</span>
+                        <span className="text-2xl group-hover:scale-110 transition-transform">{prompt.icon}</span>
+                        <span className="text-xs font-medium text-white">{prompt.label}</span>
                       </button>
                     ))}
                   </div>
+                  <p className="text-[10px] text-[hsl(var(--muted-foreground))] mt-3 text-center">
+                    Tap a topic or type your own question below
+                  </p>
                 </div>
               </div>
             ) : (
