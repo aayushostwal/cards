@@ -212,6 +212,13 @@ export interface CardFilters {
   maxMinSalary?: number;
   hasWelcomeBonus?: boolean;
   categories?: string[];
+  // New filters
+  noForeignFees?: boolean;
+  hasFuelSurchargeWaiver?: boolean;
+  hasDiningRewards?: boolean;
+  hasGroceryRewards?: boolean;
+  hasTravelRewards?: boolean;
+  hasPurchaseProtection?: boolean;
 }
 
 // Type for comparison table columns

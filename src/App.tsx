@@ -24,6 +24,15 @@ function AppContent() {
   const [showAIModal, setShowAIModal] = useState(false);
   const cards = cardsData.cards as CreditCard[];
 
+  // Helper function to check if card has rewards in specific category
+  const hasRewardCategory = (card: CreditCard, keywords: string[]) => {
+    return card.rewards.acceleratedCategories.some(cat => 
+      keywords.some(keyword => 
+        cat.category.toLowerCase().includes(keyword.toLowerCase())
+      )
+    );
+  };
+
   // Filter cards based on all criteria
   const filteredCards = cards.filter(card => {
     // Search filter
@@ -36,7 +45,7 @@ function AppContent() {
       if (!matchesSearch) return false;
     }
     
-    // Other filters
+    // Basic filters
     if (filters.issuer?.length && !filters.issuer.includes(card.basicInfo.issuer)) return false;
     if (filters.network?.length && !filters.network.some(n => card.basicInfo.network.includes(n))) return false;
     if (filters.cardType?.length && !filters.cardType.includes(card.basicInfo.cardType)) return false;
@@ -47,6 +56,26 @@ function AppContent() {
     if (filters.hasInternationalLounge && !card.loungeAccess.international) return false;
     if (filters.maxMinSalary !== undefined && card.eligibility.minSalary && card.eligibility.minSalary > filters.maxMinSalary) return false;
     if (filters.hasWelcomeBonus && !card.rewards.welcomeBonus) return false;
+    
+    // New filters
+    // No Foreign Transaction Fees (0% fee)
+    if (filters.noForeignFees && card.charges.foreignTxnFee > 0) return false;
+    
+    // Fuel Surcharge Waiver
+    if (filters.hasFuelSurchargeWaiver && !card.fees.fuelSurchargeWaiver.enabled) return false;
+    
+    // Dining & Entertainment rewards
+    if (filters.hasDiningRewards && !hasRewardCategory(card, ['dining', 'restaurant', 'food', 'entertainment', 'movies', 'swiggy', 'zomato'])) return false;
+    
+    // Grocery & Shopping rewards
+    if (filters.hasGroceryRewards && !hasRewardCategory(card, ['grocery', 'groceries', 'shopping', 'departmental', 'amazon', 'flipkart', 'myntra', 'online'])) return false;
+    
+    // Travel rewards
+    if (filters.hasTravelRewards && !hasRewardCategory(card, ['travel', 'flights', 'hotels', 'airline', 'international', 'airport'])) return false;
+    
+    // Purchase Protection
+    if (filters.hasPurchaseProtection && !card.features.insuranceCover.purchaseProtection) return false;
+    
     return true;
   });
 
