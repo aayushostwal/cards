@@ -3,12 +3,11 @@ import type { CreditCard } from '../../types/card';
 
 interface ComparisonBarProps {
   selectedCards: CreditCard[];
-  onRemoveCard: (cardId: string) => void;
   onClearAll: () => void;
   onCompare: () => void;
 }
 
-export function ComparisonBar({ selectedCards, onRemoveCard, onClearAll, onCompare }: ComparisonBarProps) {
+export function ComparisonBar({ selectedCards, onClearAll, onCompare }: ComparisonBarProps) {
   if (selectedCards.length === 0) return null;
 
   return (

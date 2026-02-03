@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import { CardGrid } from './components/cards/CardGrid';
 import { CardComparison } from './components/cards/CardComparison';
 import { FilterPanel } from './components/dashboard/FilterPanel';
@@ -17,20 +17,12 @@ import { SlidersHorizontal, X, Search, Bot, ChevronRight } from 'lucide-react';
 // Main App content with routing
 function AppContent() {
   const navigate = useNavigate();
-  const location = useLocation();
   const [filters, setFilters] = useState<CardFilters>({});
   const [selectedCards, setSelectedCards] = useState<string[]>([]);
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [detailCard, setDetailCard] = useState<CreditCard | null>(null);
   const cards = cardsData.cards as CreditCard[];
-
-  // Determine current view from pathname
-  const getCurrentView = (): 'home' | 'browse' | 'ai' => {
-    if (location.pathname === '/browse' || location.pathname === '/compare') return 'browse';
-    if (location.pathname === '/ai') return 'ai';
-    return 'home';
-  };
 
   // Filter cards based on all criteria
   const filteredCards = cards.filter(card => {
@@ -72,12 +64,6 @@ function AppContent() {
     v !== undefined && (Array.isArray(v) ? v.length > 0 : true)
   ).length;
 
-  const handleNavigate = (view: 'home' | 'browse' | 'ai') => {
-    if (view === 'home') navigate('/');
-    else if (view === 'browse') navigate('/browse');
-    else if (view === 'ai') navigate('/ai');
-  };
-
   const openCardDetail = (card: CreditCard) => {
     setDetailCard(card);
   };
@@ -93,12 +79,11 @@ function AppContent() {
         {/* Home Page */}
         <Route path="/" element={
           <div className="min-h-screen bg-[hsl(var(--background))] flex flex-col">
-            <Header currentView="home" onNavigate={handleNavigate} />
+            <Header />
             <div className="flex-1">
               <HomePage 
                 cards={cards} 
                 onGoToBrowse={() => navigate('/browse')}
-                onGoToAI={() => navigate('/ai')}
                 onCardClick={openCardDetail}
               />
             </div>
@@ -108,13 +93,13 @@ function AppContent() {
 
         {/* AI Assistant Page */}
         <Route path="/ai" element={
-          <AISearchHero cards={cards} onGoToBrowse={() => navigate('/browse')} />
+          <AISearchHero cards={cards} />
         } />
 
         {/* Compare Page */}
         <Route path="/compare" element={
           <div className="min-h-screen bg-[hsl(var(--background))] flex flex-col">
-            <Header currentView="browse" onNavigate={handleNavigate} />
+            <Header />
             <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8 w-full">
               <button
                 onClick={() => navigate('/browse')}
@@ -137,7 +122,7 @@ function AppContent() {
         {/* Browse Page */}
         <Route path="/browse" element={
           <div className="min-h-screen bg-[hsl(var(--background))] flex flex-col">
-            <Header currentView="browse" onNavigate={handleNavigate} />
+            <Header />
             
             {/* Main Content */}
             <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8 w-full">
@@ -209,7 +194,6 @@ function AppContent() {
                     <FilterPanel 
                       filters={filters} 
                       onFiltersChange={setFilters}
-                      cards={cards}
                     />
                     
                     {/* AI Suggestion Box */}
@@ -280,7 +264,6 @@ function AppContent() {
                       <FilterPanel 
                         filters={filters} 
                         onFiltersChange={setFilters}
-                        cards={cards}
                         isMobile
                       />
                     </div>
@@ -301,7 +284,6 @@ function AppContent() {
             {/* Comparison Sticky Bar */}
             <ComparisonBar 
               selectedCards={selectedCardObjects}
-              onRemoveCard={(id) => setSelectedCards(prev => prev.filter(cid => cid !== id))}
               onClearAll={() => setSelectedCards([])}
               onCompare={() => navigate('/compare')}
             />

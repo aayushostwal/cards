@@ -6,7 +6,6 @@ import { AIChatModal } from '../ai/AIChatModal';
 interface HomePageProps {
   cards: CreditCard[];
   onGoToBrowse: () => void;
-  onGoToAI: () => void;
   onCardClick?: (card: CreditCard) => void;
 }
 
@@ -212,7 +211,7 @@ function AvatarStack() {
   );
 }
 
-export function HomePage({ cards, onGoToBrowse, onGoToAI, onCardClick }: HomePageProps) {
+export function HomePage({ cards, onGoToBrowse, onCardClick }: HomePageProps) {
   const [isChatModalOpen, setIsChatModalOpen] = useState(false);
   const [initialChatMessage, setInitialChatMessage] = useState<string | undefined>();
   

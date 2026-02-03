@@ -2,12 +2,8 @@ import { Bot, CreditCard, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-interface HeaderProps {
-  currentView: 'home' | 'browse' | 'ai';
-  onNavigate: (view: 'home' | 'browse' | 'ai') => void;
-}
 
-export function Header({ currentView, onNavigate }: HeaderProps) {
+export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
 

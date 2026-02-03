@@ -4,12 +4,11 @@ import remarkGfm from 'remark-gfm';
 import type { CreditCard } from '../../types/card';
 import { getChatCompletion } from '../../lib/groq';
 import type { ChatMessage } from '../../lib/groq';
-import { Send, Bot, User, CreditCard as CreditCardIcon, Trash2, LayoutGrid, ArrowLeft } from 'lucide-react';
+import { Send, Bot, User, CreditCard as CreditCardIcon, Trash2, LayoutGrid } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface AISearchHeroProps {
   cards: CreditCard[];
-  onGoToBrowse: () => void;
 }
 
 const QUICK_PROMPTS = [
@@ -21,7 +20,7 @@ const QUICK_PROMPTS = [
   { text: "Compare HDFC vs ICICI cards", icon: "⚖️" },
 ];
 
-export function AISearchHero({ cards, onGoToBrowse }: AISearchHeroProps) {
+export function AISearchHero({ cards }: AISearchHeroProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);

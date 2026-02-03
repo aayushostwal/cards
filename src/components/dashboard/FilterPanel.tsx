@@ -1,17 +1,15 @@
-import type { CreditCard, CardFilters, CardNetwork, CardType } from '../../types/card';
-import { Gift, CreditCard as CreditCardIcon, BadgeCheck, Sparkles, X, RotateCcw } from 'lucide-react';
+import type { CardFilters, CardNetwork, CardType } from '../../types/card';
+import { Gift, CreditCard as CreditCardIcon, BadgeCheck, Sparkles, RotateCcw } from 'lucide-react';
 
 interface FilterPanelProps {
   filters: CardFilters;
   onFiltersChange: (filters: CardFilters) => void;
-  cards: CreditCard[];
   isMobile?: boolean;
 }
 
-export function FilterPanel({ filters, onFiltersChange, cards, isMobile }: FilterPanelProps) {
+export function FilterPanel({ filters, onFiltersChange, isMobile }: FilterPanelProps) {
   // Get unique values from cards
   const networks: CardNetwork[] = ['Visa', 'Mastercard', 'RuPay', 'Amex'];
-  const cardTypes: CardType[] = ['Entry Level', 'Premium', 'Super Premium'];
 
   const toggleArrayFilter = <T extends string>(
     key: keyof CardFilters,
@@ -37,20 +35,6 @@ export function FilterPanel({ filters, onFiltersChange, cards, isMobile }: Filte
   ).length;
 
   const clearFilters = () => onFiltersChange({});
-
-  // Reward type options
-  const rewardTypes = [
-    { id: 'cashback', label: 'Cash Back', checked: filters.minRewardRate !== undefined },
-    { id: 'travel', label: 'Travel & Miles', checked: filters.hasDomesticLounge || filters.hasInternationalLounge },
-  ];
-
-  // Annual fee options
-  const annualFeeOptions = [
-    { value: 0, label: '$0 (No Fee)' },
-    { value: 500, label: 'Under ₹500' },
-    { value: 2500, label: 'Under ₹2,500' },
-    { value: 5000, label: 'Premium (₹5,000+)' },
-  ];
 
   // Credit score / Card type mapping
   const creditScoreOptions = [
