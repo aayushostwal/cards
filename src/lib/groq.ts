@@ -38,60 +38,45 @@ export function buildSystemPrompt(cards: CreditCard[]): string {
     forexFee: `${card.charges.foreignTxnFee}%`,
   }));
 
-  return `<role>Credit Card Advisor for India</role>
+  return `You are a credit card advisor for India. Recommend cards ONLY from the database below.
 
-<task>Recommend credit cards from the database. Be helpful, concise, and use proper formatting.</task>
+IMPORTANT RULES:
+1. Be concise - max 200 words
+2. Use proper markdown tables with separator rows
+3. Use ₹ for rupees
+4. No greetings or fluff
 
-<rules>
-- ONLY recommend cards from the CARDS list below
-- Use markdown tables for comparisons
-- Keep responses under 200 words
-- Use ₹ symbol for Indian Rupees
-- Be direct, no unnecessary greetings
-- If user needs are unclear, ask ONE short question
-</rules>
-
-<cards>
+CARD DATABASE:
 ${JSON.stringify(cardSummaries, null, 2)}
-</cards>
 
-<format>
-When recommending cards, use this structure:
+MARKDOWN TABLE FORMAT (MUST follow exactly):
 
-### [Card Name]
-**Issuer:** [Bank Name]
+| Card | Issuer | Fee | Rewards |
+|------|--------|-----|---------|
+| Card1 | Bank1 | ₹X | X% |
+| Card2 | Bank2 | ₹Y | Y% |
 
-| Feature | Value |
-|---------|-------|
-| Annual Fee | ₹X |
-| Rewards | X% |
-| Best For | [Category] |
-| Min Salary | ₹X/month |
+CRITICAL: Tables MUST have:
+- Line 1: Header with | separators
+- Line 2: Dashes like |------|--------|
+- Line 3+: Data rows
 
-**Recommendation:** [1-2 sentence explanation]
+EXAMPLE RESPONSE:
 
-> **Pro tip:** [Fee waiver or bonus info]
-</format>
+### Best Cards for Online Shopping
 
-<example>
-User: "card for online shopping"
+| Card | Issuer | Annual Fee | Rewards |
+|------|--------|------------|---------|
+| HDFC Millennia | HDFC Bank | ₹1,000 | 5% on Amazon |
+| Amazon Pay ICICI | ICICI Bank | ₹0 | 5% with Prime |
 
-### HDFC Millennia
-**Issuer:** HDFC Bank
+**Top Pick:** HDFC Millennia for best overall rewards.
 
-| Feature | Value |
-|---------|-------|
-| Annual Fee | ₹1,000 |
-| Rewards | 5% on Amazon/Flipkart |
-| Best For | Online Shopping |
-| Min Salary | ₹25k/month |
+> Tip: HDFC fee waived on ₹1L yearly spend.
 
-**Recommendation:** Best entry-level card for e-commerce with 5% cashback on major platforms.
+---
 
-> **Pro tip:** Annual fee waived on spending ₹1 lakh/year.
-</example>
-
-Now answer the user's question using cards from the database above. Use tables and proper markdown formatting.`;
+Now answer the user. Use the exact table format shown above with the |------| separator row.`;
 }
 
 // Ollama API call (OpenAI-compatible format)
@@ -111,26 +96,25 @@ async function getOllamaCompletion(
     headers['Authorization'] = `Bearer ${OLLAMA_API_TOKEN}`;
   }
 
-  // Combine system prompt with first user message for better Gemma compatibility
-  const formattedMessages = messages.map(m => ({ 
-    role: m.role, 
-    content: m.content 
-  }));
-
+  // Combine system prompt with user message for better Gemma compatibility
+  const userQuestion = messages[messages.length - 1]?.content || '';
+  
   const response = await fetch(`${OLLAMA_ENDPOINT}/v1/chat/completions`, {
     method: 'POST',
     headers,
     body: JSON.stringify({
       model: OLLAMA_MODEL,
       messages: [
-        { role: 'user', content: systemPrompt + '\n\n---\n\nUser question: ' + (formattedMessages[0]?.content || '') },
-        ...formattedMessages.slice(1),
+        { 
+          role: 'user', 
+          content: `${systemPrompt}\n\n---\n\nUSER QUESTION: ${userQuestion}\n\nRemember: Use proper markdown table with |------| separator row.`
+        },
       ],
       stream: false,
-      temperature: 0.4,      // Balanced for Gemma - not too creative, not too rigid
-      top_p: 0.9,            // Nucleus sampling for better quality
-      max_tokens: 600,       // Enough for detailed response with table
-      repeat_penalty: 1.1,   // Reduce repetition
+      temperature: 0.3,
+      top_p: 0.85,
+      max_tokens: 700,
+      repeat_penalty: 1.15,
     }),
   });
 
