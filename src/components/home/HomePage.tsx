@@ -14,8 +14,9 @@ function AIChatWidget({ onOpenChat }: { onOpenChat: (message?: string) => void }
   const [inputValue, setInputValue] = useState('');
   
   const suggestedPrompts = [
-    "Best for international travel",
-    "No annual fee with cashback"
+    { text: "Best card for Amazon & Swiggy with ₹30k salary", icon: "🛒" },
+    { text: "Compare top travel cards with lounge access", icon: "✈️" },
+    { text: "Zero annual fee card with good rewards", icon: "💰" },
   ];
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -60,19 +61,20 @@ function AIChatWidget({ onOpenChat }: { onOpenChat: (message?: string) => void }
         {/* Suggested Prompts */}
         <div className="space-y-2">
           <p className="text-[10px] sm:text-xs font-medium text-[hsl(var(--muted-foreground))] uppercase tracking-wide">
-            Suggested Prompts
+            Try asking
           </p>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-col gap-1.5">
             {suggestedPrompts.map((prompt, i) => (
               <button
                 key={i}
                 onClick={(e) => {
                   e.stopPropagation();
-                  handlePromptClick(prompt);
+                  handlePromptClick(prompt.text);
                 }}
-                className="px-2.5 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-xs bg-[hsl(var(--secondary))] hover:bg-[hsl(var(--background-tertiary))] text-[hsl(var(--muted-foreground))] hover:text-white border border-[hsl(var(--border))] rounded-full transition-colors"
+                className="flex items-center gap-2 px-2.5 sm:px-3 py-1.5 sm:py-2 text-[10px] sm:text-xs bg-[hsl(var(--secondary))] hover:bg-[hsl(var(--background-tertiary))] text-[hsl(var(--muted-foreground))] hover:text-white border border-[hsl(var(--border))] hover:border-blue-500/50 rounded-lg transition-all text-left"
               >
-                "{prompt}"
+                <span>{prompt.icon}</span>
+                <span className="flex-1 line-clamp-1">{prompt.text}</span>
               </button>
             ))}
           </div>
