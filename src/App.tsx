@@ -3,16 +3,15 @@ import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import { CardGrid } from './components/cards/CardGrid';
 import { CardComparison } from './components/cards/CardComparison';
 import { FilterPanel } from './components/dashboard/FilterPanel';
-import { AISearchHero } from './components/ai/AISearchHero';
 import { HomePage } from './components/home/HomePage';
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 import { ComparisonBar } from './components/cards/ComparisonBar';
-import { AISuggestionBox } from './components/cards/AISuggestionBox';
+import { AIChatModal } from './components/ai/AIChatModal';
 import { CardDetailModal } from './components/cards/CardDetailModal';
 import type { CreditCard, CardFilters } from './types/card';
 import cardsData from './data/cards.json';
-import { SlidersHorizontal, X, Search, Bot, ChevronRight } from 'lucide-react';
+import { SlidersHorizontal, X, Search, Bot, ChevronRight, Sparkles } from 'lucide-react';
 
 // Main App content with routing
 function AppContent() {
@@ -22,6 +21,7 @@ function AppContent() {
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [detailCard, setDetailCard] = useState<CreditCard | null>(null);
+  const [showAIModal, setShowAIModal] = useState(false);
   const cards = cardsData.cards as CreditCard[];
 
   // Filter cards based on all criteria
@@ -75,6 +75,13 @@ function AppContent() {
         <CardDetailModal card={detailCard} onClose={() => setDetailCard(null)} />
       )}
 
+      {/* AI Chat Modal */}
+      <AIChatModal
+        cards={cards}
+        isOpen={showAIModal}
+        onClose={() => setShowAIModal(false)}
+      />
+
       <Routes>
         {/* Home Page */}
         <Route path="/" element={
@@ -89,11 +96,6 @@ function AppContent() {
             </div>
             <Footer />
           </div>
-        } />
-
-        {/* AI Assistant Page */}
-        <Route path="/ai" element={
-          <AISearchHero cards={cards} />
         } />
 
         {/* Compare Page */}
@@ -141,14 +143,14 @@ function AppContent() {
                     <p className="text-sm sm:text-base text-[hsl(var(--muted-foreground))]">Discover the best offers tailored to your profile.</p>
                   </div>
                   
-                  {/* AI Status Badge - Hidden on mobile, shown on larger screens */}
-                  <div className="hidden md:inline-flex items-center gap-3 px-4 py-2.5 bg-[hsl(var(--card))] border border-[hsl(var(--border))] rounded-xl shrink-0">
-                    <Bot className="w-5 h-5 text-blue-400" />
-                    <div>
-                      <p className="text-sm font-medium text-white">AI Assistant is active</p>
-                      <p className="text-xs text-[hsl(var(--muted-foreground))]">Filtering {cards.length} cards based on your history</p>
-                    </div>
-                  </div>
+                  {/* AI Assistant Button */}
+                  <button
+                    onClick={() => setShowAIModal(true)}
+                    className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium rounded-xl transition-all shadow-lg shadow-blue-500/20 shrink-0"
+                  >
+                    <Sparkles className="w-4 h-4" />
+                    <span>Ask AI Assistant</span>
+                  </button>
                 </div>
 
                 {/* Search Bar */}
@@ -197,14 +199,29 @@ function AppContent() {
                     />
                     
                     {/* AI Suggestion Box */}
-                    <AISuggestionBox 
-                      onAskAI={() => navigate('/ai')}
-                      filters={{
-                        hasTravelFilters: filters.hasDomesticLounge || filters.hasInternationalLounge,
-                        hasRewardFilters: filters.minRewardRate !== undefined,
-                        hasFeeFilters: filters.maxAnnualFee !== undefined
-                      }}
-                    />
+                    <div className="bg-gradient-to-br from-blue-600/20 to-purple-600/20 border border-blue-500/30 rounded-2xl p-5 mt-6">
+                      <div className="flex items-start gap-3 mb-4">
+                        <div className="p-2 bg-blue-500/20 rounded-lg">
+                          <Sparkles className="w-5 h-5 text-blue-400" />
+                        </div>
+                        <div>
+                          <p className="text-xs font-medium text-blue-400 uppercase tracking-wide mb-1">
+                            AI Top Choice for You
+                          </p>
+                          <h4 className="text-white font-semibold">Need a custom pick?</h4>
+                        </div>
+                      </div>
+                      <p className="text-sm text-[hsl(var(--muted-foreground))] mb-4">
+                        Let AI analyze your needs and find the perfect card match.
+                      </p>
+                      <button
+                        onClick={() => setShowAIModal(true)}
+                        className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl transition-colors"
+                      >
+                        <Bot className="w-4 h-4" />
+                        Ask AI Assistant
+                      </button>
+                    </div>
                   </div>
                 </aside>
                 

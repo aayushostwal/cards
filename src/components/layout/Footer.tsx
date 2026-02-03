@@ -1,19 +1,7 @@
-import { CreditCard, Twitter, Linkedin } from 'lucide-react';
+import { CreditCard, Github, Linkedin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export function Footer() {
-  const footerLinks = [
-    { label: 'Privacy Policy', href: '#' },
-    { label: 'Terms of Service', href: '#' },
-    { label: 'Contact', href: '#' },
-    { label: 'Careers', href: '#' },
-  ];
-
-  const socialLinks = [
-    { icon: Twitter, href: '#', label: 'Twitter' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn' },
-  ];
-
   return (
     <footer className="border-t border-[hsl(var(--border))] bg-[hsl(var(--background))]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
@@ -26,38 +14,39 @@ export function Footer() {
             <span className="text-sm sm:text-base font-bold text-white">CardSmart</span>
           </Link>
 
-          {/* Links */}
-          <nav className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
-            {footerLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="text-xs sm:text-sm text-[hsl(var(--muted-foreground))] hover:text-white transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
+          {/* Built by */}
+          <div className="flex items-center gap-2 text-sm text-[hsl(var(--muted-foreground))]">
+            <span>Built by</span>
+            <span className="text-white font-medium">Aayush Ostwal</span>
+          </div>
 
           {/* Social Links */}
           <div className="flex items-center gap-2 sm:gap-3">
-            {socialLinks.map((social) => (
-              <a
-                key={social.label}
-                href={social.href}
-                aria-label={social.label}
-                className="p-1.5 sm:p-2 rounded-lg bg-[hsl(var(--secondary))] text-[hsl(var(--muted-foreground))] hover:text-white hover:bg-[hsl(var(--background-tertiary))] transition-colors"
-              >
-                <social.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              </a>
-            ))}
+            <a
+              href="https://www.linkedin.com/in/aayush-ostwal/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="p-1.5 sm:p-2 rounded-lg bg-[hsl(var(--secondary))] text-[hsl(var(--muted-foreground))] hover:text-white hover:bg-[hsl(var(--background-tertiary))] transition-colors"
+            >
+              <Linkedin className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            </a>
+            <a
+              href="https://github.com/aayushostwal/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              className="p-1.5 sm:p-2 rounded-lg bg-[hsl(var(--secondary))] text-[hsl(var(--muted-foreground))] hover:text-white hover:bg-[hsl(var(--background-tertiary))] transition-colors"
+            >
+              <Github className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            </a>
           </div>
         </div>
 
         {/* Copyright */}
         <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-[hsl(var(--border))]">
           <p className="text-center text-[10px] sm:text-xs text-[hsl(var(--muted-foreground))]">
-            © 2024 CardSmart Technologies Inc. All rights reserved. Financial tools and advice are for informational purposes only.
+            © 2024 CardSmart. Financial tools and advice are for informational purposes only.
           </p>
         </div>
       </div>

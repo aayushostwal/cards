@@ -1,15 +1,13 @@
-import { Bot, CreditCard, Menu, X } from 'lucide-react';
+import { CreditCard, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
 
   const navItems = [
-    { id: 'ai' as const, label: 'AI Assistant', icon: Bot, path: '/ai' },
-    { id: 'browse' as const, label: 'Compare Cards', icon: null, path: '/browse' },
+    { label: 'Compare Cards', path: '/browse' },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -33,7 +31,7 @@ export function Header() {
           <nav className="hidden md:flex items-center gap-1">
             {navItems.map((item) => (
               <Link
-                key={item.id}
+                key={item.path}
                 to={item.path}
                 className={`flex items-center gap-2 px-3 lg:px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                   isActive(item.path)
@@ -41,7 +39,6 @@ export function Header() {
                     : 'text-[hsl(var(--muted-foreground))] hover:text-white hover:bg-[hsl(var(--secondary))]'
                 }`}
               >
-                {item.icon && <item.icon className="w-4 h-4" />}
                 {item.label}
               </Link>
             ))}
@@ -63,7 +60,7 @@ export function Header() {
           <div className="px-4 py-4 space-y-2">
             {navItems.map((item) => (
               <Link
-                key={item.id}
+                key={item.path}
                 to={item.path}
                 onClick={() => setMobileMenuOpen(false)}
                 className={`flex items-center gap-3 w-full px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
@@ -72,7 +69,6 @@ export function Header() {
                     : 'text-[hsl(var(--muted-foreground))] hover:text-white hover:bg-[hsl(var(--secondary))]'
                 }`}
               >
-                {item.icon && <item.icon className="w-5 h-5" />}
                 {item.label}
               </Link>
             ))}
