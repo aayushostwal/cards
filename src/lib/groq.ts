@@ -16,75 +16,82 @@ const groq = new Groq({
 // Ollama configuration (via ngrok)
 const OLLAMA_ENDPOINT = import.meta.env.VITE_OLLAMA_ENDPOINT || '';
 const OLLAMA_API_TOKEN = import.meta.env.VITE_OLLAMA_API_TOKEN || '';
-const OLLAMA_MODEL = import.meta.env.VITE_OLLAMA_MODEL || 'llama3.2';
+const OLLAMA_MODEL = import.meta.env.VITE_OLLAMA_MODEL || 'gemma2';
 
 export interface ChatMessage {
   role: 'user' | 'assistant' | 'system';
   content: string;
 }
 
-// Build system prompt with card data context
+// Build system prompt optimized for Gemma models
 export function buildSystemPrompt(cards: CreditCard[]): string {
   const cardSummaries = cards.map(card => ({
     name: card.basicInfo.name,
     issuer: card.basicInfo.issuer,
     type: card.basicInfo.cardType,
-    joiningFee: card.fees.joiningFee,
-    annualFee: card.fees.annualFee,
-    annualFeeWaiver: card.fees.annualFeeWaiver,
-    rewardRate: `${card.rewards.rewardRate}% ${card.rewards.rewardUnit}`,
-    bestCategories: card.rewards.acceleratedCategories.slice(0, 3).map(c => `${c.category}: ${c.rate}%`).join(', '),
-    domesticLounge: card.loungeAccess.domestic ? `${card.loungeAccess.domestic.freeVisits}/year` : 'No',
-    internationalLounge: card.loungeAccess.international ? `${card.loungeAccess.international.freeVisits}/year` : 'No',
-    minSalary: card.eligibility.minSalary ? `₹${card.eligibility.minSalary.toLocaleString('en-IN')}/month` : 'No minimum',
-    foreignTxnFee: `${card.charges.foreignTxnFee}%`,
-    welcomeBonus: card.rewards.welcomeBonus ? 
-      (card.rewards.welcomeBonus.value ? `₹${card.rewards.welcomeBonus.value}` : `${card.rewards.welcomeBonus.points} points`) : 'None',
+    annualFee: `₹${card.fees.annualFee}`,
+    feeWaiver: card.fees.annualFeeWaiver || 'None',
+    rewards: `${card.rewards.rewardRate}% ${card.rewards.rewardUnit}`,
+    categories: card.rewards.acceleratedCategories.slice(0, 2).map(c => `${c.category} ${c.rate}%`).join(', '),
+    lounge: card.loungeAccess.domestic ? `${card.loungeAccess.domestic.freeVisits}/yr` : 'No',
+    minSalary: card.eligibility.minSalary ? `₹${(card.eligibility.minSalary/1000)}k/mo` : 'Any',
+    forexFee: `${card.charges.foreignTxnFee}%`,
   }));
 
-  return `You are a helpful credit card advisor for Indian consumers. You have detailed knowledge about ${cards.length} credit cards from major Indian banks.
----
+  return `<role>Credit Card Advisor for India</role>
 
-**YOUR ROLE**:
-1. Help users find the best credit card based on their spending patterns and needs
-2. Ask follow-up questions to better understand their requirements if needed
-3. Compare cards and explain trade-offs clearly
-4. Be specific with numbers (fees, rewards rates, etc.)
-5. Mention both pros and cons of recommended cards
-6. If salary/income is mentioned, filter out cards they may not qualify for
+<task>Recommend credit cards from the database. Be helpful, concise, and use proper formatting.</task>
 
-**IMPORTANT GUIDELINES**:
-- Always recommend from the available cards list only
-- Be concise but thorough
-- Mention fee waiver conditions when relevant
-- If user's needs are unclear, ask 1-2 focused follow-up questions
-- Consider: spending categories, travel frequency, salary, fee sensitivity
+<rules>
+- ONLY recommend cards from the CARDS list below
+- Use markdown tables for comparisons
+- Keep responses under 200 words
+- Use ₹ symbol for Indian Rupees
+- Be direct, no unnecessary greetings
+- If user needs are unclear, ask ONE short question
+</rules>
 
-**SPENDING CATEGORIES TO ASK ABOUT**:
-- Online shopping (Amazon, Flipkart)
-- Food delivery (Swiggy, Zomato)
-- Groceries
-- Travel (flights, hotels)
-- Fuel
-- Bill payments (utilities, mobile)
-- International transactions
-
-**RESPONSE FORMAT**:
-- **Always** respond in **Markdown format**
-- Use **bold** for card names and important numbers
-- Use bullet points (- or *) for lists and comparisons
-- Use ### for section headers when comparing multiple cards
-- Use **tables** when comparing features across cards
-- Use > **blockquotes** for pro tips or important notes
-- Keep responses well-structured and scannable
-
-KEEP YOUR RESPONSE SHORT AND TO THE POINT. MAKE SURE IT IS WELL STRUCTURED AND EASY TO UNDERSTAND.
-Respond in a friendly, professional tone. Use ₹ symbol for Indian Rupees.
-
-AVAILABLE CREDIT CARDS DATA:
+<cards>
 ${JSON.stringify(cardSummaries, null, 2)}
+</cards>
 
-`;
+<format>
+When recommending cards, use this structure:
+
+### [Card Name]
+**Issuer:** [Bank Name]
+
+| Feature | Value |
+|---------|-------|
+| Annual Fee | ₹X |
+| Rewards | X% |
+| Best For | [Category] |
+| Min Salary | ₹X/month |
+
+**Recommendation:** [1-2 sentence explanation]
+
+> **Pro tip:** [Fee waiver or bonus info]
+</format>
+
+<example>
+User: "card for online shopping"
+
+### HDFC Millennia
+**Issuer:** HDFC Bank
+
+| Feature | Value |
+|---------|-------|
+| Annual Fee | ₹1,000 |
+| Rewards | 5% on Amazon/Flipkart |
+| Best For | Online Shopping |
+| Min Salary | ₹25k/month |
+
+**Recommendation:** Best entry-level card for e-commerce with 5% cashback on major platforms.
+
+> **Pro tip:** Annual fee waived on spending ₹1 lakh/year.
+</example>
+
+Now answer the user's question using cards from the database above. Use tables and proper markdown formatting.`;
 }
 
 // Ollama API call (OpenAI-compatible format)
@@ -100,11 +107,15 @@ async function getOllamaCompletion(
     'Content-Type': 'application/json',
   };
 
-  // Add authorization header if token is provided
   if (OLLAMA_API_TOKEN) {
-    headers["Content-Type"] = "application/json";
     headers['Authorization'] = `Bearer ${OLLAMA_API_TOKEN}`;
   }
+
+  // Combine system prompt with first user message for better Gemma compatibility
+  const formattedMessages = messages.map(m => ({ 
+    role: m.role, 
+    content: m.content 
+  }));
 
   const response = await fetch(`${OLLAMA_ENDPOINT}/v1/chat/completions`, {
     method: 'POST',
@@ -112,14 +123,14 @@ async function getOllamaCompletion(
     body: JSON.stringify({
       model: OLLAMA_MODEL,
       messages: [
-        { role: 'system', content: systemPrompt },
-        ...messages.map(m => ({ role: m.role, content: m.content })),
+        { role: 'user', content: systemPrompt + '\n\n---\n\nUser question: ' + (formattedMessages[0]?.content || '') },
+        ...formattedMessages.slice(1),
       ],
       stream: false,
-      // options: {
-      //   temperature: 0.7,
-      //   num_predict: 1024,
-      // },
+      temperature: 0.4,      // Balanced for Gemma - not too creative, not too rigid
+      top_p: 0.9,            // Nucleus sampling for better quality
+      max_tokens: 600,       // Enough for detailed response with table
+      repeat_penalty: 1.1,   // Reduce repetition
     }),
   });
 
@@ -129,7 +140,17 @@ async function getOllamaCompletion(
   }
 
   const data = await response.json();
-  return data.message?.content || 'Sorry, I could not generate a response.';
+  
+  // Handle OpenAI-compatible response format
+  if (data.choices && data.choices[0]?.message?.content) {
+    return data.choices[0].message.content;
+  }
+  // Handle native Ollama format
+  if (data.message?.content) {
+    return data.message.content;
+  }
+  
+  return 'Sorry, I could not generate a response.';
 }
 
 // Groq API call
@@ -143,7 +164,7 @@ async function getGroqCompletion(
       { role: 'system', content: systemPrompt },
       ...messages.map(m => ({ role: m.role, content: m.content })),
     ],
-    temperature: 0.7,
+    temperature: 0.5,
     max_tokens: 1024,
   });
 

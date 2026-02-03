@@ -103,7 +103,7 @@ export function AIChatModal({ cards, isOpen, onClose, initialMessage }: AIChatMo
         }
         return next;
       });
-    }, 2500); // Change quote every 2.5 seconds
+    }, 5500); // Change quote every 2.5 seconds
 
     return () => clearInterval(interval);
   }, [isLoading]);
